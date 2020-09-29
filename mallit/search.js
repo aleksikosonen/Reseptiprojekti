@@ -1,0 +1,1 @@
+//API etsintöjen oma luokka
