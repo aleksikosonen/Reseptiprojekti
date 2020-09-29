@@ -8,14 +8,37 @@
     <script src="index.js"></script>
 </head>
 <body>
-
     <header class="header">
         <img src="logo_placeholder.png" alt="Logo Placeholder"
-             width="259" height="144">
+         width="259" height="144">
+         <span class="random_food_trivia">random food trivia <!--get.random.food.trivia --></span>
         <form class="search">
             <input type="text" class="search_field" >
-        </form>
+            <button id="search">
+                <!--<img src="magnifying.svg.png"/> -->
+                Search
+            </button>
+            <button id="map">
+                tämä avaa kartan
+            </button>
+        </form>     
     </header>
+
+<div class="results">
+    <ul class="results_list">
+        <li>
+            <a class="results_link results_link--active" href="#23456">
+                <figure class="results_fig">
+                    <img src="img/test-1.jpg" alt="Test">
+                </figure>
+                <div class="results_data">
+                    <h4 class="results_name">Pasta with Tomato ...</h4>
+                    <p class="results_author">The Pioneer Woman</p>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
 
     <div class="recipe">
 
