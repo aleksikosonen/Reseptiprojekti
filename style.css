@@ -9,11 +9,15 @@ header {
 }
 
 .results{
-    width: 33%;
+    width: 25%;
 }
 
 .recipe{
-    width: 33%;
+    width: 50%;
+}
+
+.grocery{
+    width: 25%;
 }
 
 #page-container{
