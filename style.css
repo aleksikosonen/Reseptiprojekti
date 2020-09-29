@@ -1,0 +1,22 @@
+header {
+    width: 100%;
+    background-image:url("spagetti.png");
+    position: center;
+}
+
+.random_food_trivia {
+    background: grey;
+}
+
+.results{
+    width: 33%;
+}
+
+.recipe{
+    width: 33%;
+}
+
+#page-container{
+    display: flex;
+    flex-wrap: wrap;
+}
