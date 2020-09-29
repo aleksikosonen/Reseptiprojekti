@@ -1,1 +1,0 @@
-//ostoslista elementille luotu luokka
