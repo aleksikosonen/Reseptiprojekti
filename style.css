@@ -42,17 +42,21 @@ header {
 
 .results{
     width: 25%;
+    height: auto;
     background: rgb(154, 152, 132);
 }
 
 .recipe{
     width: 50%;
+    height: auto;
     background: rgb(227, 227, 221);
     text-align: center;
     position: relative;
 }
 
 .grocery{
+    border-radius: 25px;
+    height: auto;
     width: 25%;
     background: rgb(154, 152, 132);
 }

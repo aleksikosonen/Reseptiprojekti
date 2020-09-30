@@ -1,9 +1,9 @@
 
 //dom metodeille valmiit muuttujat
-const searchInput = document.querySelector(".search_field");
-const searchForm = document.querySelector(".search");
-const searchResults = document.querySelector(".results");
-const resList= document.querySelector(".search_results_list");
+    const searchInput = document.querySelector(".search_field");
+    const searchForm = document.querySelector(".search");
+    const searchResults = document.querySelector(".results");
+    const resList= document.querySelector(".search_results_list");
 
 //staattisille asioille mitä joutuu toistamaan monesti
 const staattinen = {
