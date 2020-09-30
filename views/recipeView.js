@@ -1,1 +1,0 @@
-//resepti näkymälle tehty luokka

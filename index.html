@@ -5,29 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meal Hunters</title>
     <link rel="stylesheet" href="style.css">
-    <script src="index.js"></script>
 </head>
+
 <body>
-    <header class="header">
-        <img src="logo_placeholder.png" alt="Logo Placeholder"
-         width="259" height="144">
-         <span class="random_food_trivia">random food trivia <!--get.random.food.trivia --></span>
-        <form class="search">
-            <input type="text" class="search_field" >
-            <button id="search">
-                <!--<img src="magnifying.svg.png"/> -->
-                Search
-            </button>
-            <button id="map">
-                tämä avaa kartan
-            </button>
-        </form>     
+    
+    <header class="headerPhoto">
+        <span class="random_food_trivia">random food trivia <!--get.random.food.trivia --></span>
+        <button id="map">
+            tämä avaa kartan
+        </button>
+        <header class="header">
+            <img class="logoPlaceHolder" src="logo_placeholder.png" alt="Logo Placeholder"
+             width="259" height="144">
+            <form class="search">
+                <input type="text" class="search_field" placeholder="Search for yumyum...">
+                <button class="search_icon">
+                    <!--<img src="magnifying.svg.png"/> -->
+                    Search
+                </button>
+            </form>
+        </header>
     </header>
 
+    <div id="page-container">
+
     <div class="results">
-        <ul class="results_list">
-            <li>
-                <!--
+        <ul class="search_results_list">
+           <!--<li>
                 <a class="results_link results_link--active" href="#23456">
                     <figure class="results_fig">
                         <img src="img/test-1.jpg" alt="Test">
@@ -37,10 +41,15 @@
                         <p class="results_author">The Pioneer Woman</p>
                     </div>
                 </a>
-            -->
-            </li>
+            </li> -->
         </ul>
+        <div class="result_page">
+            
+        </div>
+    
     </div>
+    
+
 
     <div class="recipe">
 
@@ -65,24 +74,28 @@
             </ul>
         </div>
     </div>
+
     <div class="grocery">
         <h2 class="myGroceryList"></h2>
         <ul class="groceryList">
-        <!--
-            <li class="shopping_item">
-                <div class="shopping__count">
-                    <input type="number" value="500" step="100">
-                    <p>g</p>
-                </div>
-                <p class="shopping__description">Pasta</p>
-                <button class="shopping__delete btn-tiny">
-                    <svg>
-                        <use href="img/icons.svg#icon-circle-with-cross"></use>
-                    </svg>
-                </button> 
-            </li>
-        -->
+
+                <li class="shopping_item">
+                    <div class="shopping__count">
+                        <input type="number" value="500" step="100">
+                        <p>g</p>
+                    </div>
+                    <p class="shopping__description">Pasta</p>
+                    <button class="shopping__delete btn-tiny">
+                        <svg>
+                            <use href=""></use>
+                        </svg>
+                    </button>
+                </li>
+
         </ul>
     </div>
+</div>
+<script type="text/javascript" src="index.js"></script>
+<script type="text/javascript" src="jQuery.js"></script>
 </body>
 </html>

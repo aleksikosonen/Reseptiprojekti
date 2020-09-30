@@ -1,1 +1,0 @@
-//kartan luokka
