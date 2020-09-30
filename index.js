@@ -11,6 +11,16 @@ const staattinen = {
 };
 
 
+/**function etsiOhjelma(){
+    const ohjelma = document.querySelector('input[id=hakuteksti]');
+    const url = `https://forkify-api.herokuapp.com/api/search?q=${this.query}`;
+    fetch(url)
+    .then(response =>response.json())
+    .then((jsonData) => {
+      console.log(jsonData);
+
+    }
+};**/
 
 
 class Search{
@@ -18,20 +28,31 @@ class Search{
     constructor(query){
         this.query = query;
     }
+        etsiOhjelma(){
+        //const ohjelma = document.querySelector('input[id=hakuteksti]');
+        const url = `https://forkify-api.herokuapp.com/api/search?q=${this.query}`;
+        fetch(url)
+        .then(response =>response.json()) 
+        .then((jsonData) => {
+            console.log(jsonData);
+            jsonData.recipes;
+            console.log(jsonData.recipes);
+        });
+    }
     //Haetaan APIsta reseptejä
-    async getResults() {
+    /**async getResults() {
         try{
             const res = await fetch(`https://forkify-api.herokuapp.com/api/search?q=${this.query}`);
             console.log(res);
-            this.result = res.data.recipes;
+            this.result = res.json();
             console.log(this.result);
             console.log("pääsin tänne asti");
         }catch(error){
             //error viesti jos ei tule vastausta
             alert("Something went wrong :O");
         } 
-    }
-}
+    }**/
+};
 
 function clearInput(){
     //hakunkentän nollaamiseen käytettävä funktio
@@ -82,10 +103,10 @@ async function searchControl() {
         
         //haetaan reseptit
         try{
-            await state.search.getResults();
+            await state.search.etsiOhjelma();
             //renderöidään tulokset
 
-            renderResults(state.search.result);
+            //renderResults(state.search.result);
 
         }catch(error){
             alert("Something went wrong again");
@@ -97,3 +118,4 @@ searchForm.addEventListener("submit", e =>{
     e.preventDefault();
     searchControl();
 });
+

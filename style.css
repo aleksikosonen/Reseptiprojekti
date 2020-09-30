@@ -1,26 +1,70 @@
+body {
+    background: rgb(198, 197, 185);
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 header {
+    margin: auto;
+    text-align: center;
+}
+
+.headerPhoto {
+    background-image:url("headerImage1.jpg");
     width: 100%;
-    background-image:url("spagetti.png");
-    position: center;
+    height: 250px;
+    background-position: center;
+    background-size: cover;
+    position:relative;
 }
 
 .random_food_trivia {
-    background: grey;
+    background: rgb(198, 197, 185);
 }
 
-.results{
-    width: 25%;
+.search {
+
 }
 
-.recipe{
-    width: 50%;
+.logoPlaceHolder {
+    margin: 20px 0px 20px 0px;
 }
 
-.grocery{
-    width: 25%;
+#map {
+
 }
 
 #page-container{
     display: flex;
     flex-wrap: wrap;
+    margin:0px 50px 0px 50px;
+}
+
+.results{
+    width: 25%;
+    background: rgb(154, 152, 132);
+}
+
+.recipe{
+    width: 50%;
+    background: rgb(227, 227, 221);
+    text-align: center;
+    position: relative;
+}
+
+.grocery{
+    width: 25%;
+    background: rgb(154, 152, 132);
+}
+
+@media only screen and (max-width: 800px) {
+    .results  {
+        width: 100%;
+    }
+    .recipe {
+        width: 100%;
+    }
+    .grocery {
+        width: 100%;
+    }
 }
