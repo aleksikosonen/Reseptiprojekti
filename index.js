@@ -2,6 +2,7 @@ const searchInput = document.querySelector(".search_field");
 const searchForm = document.querySelector(".search");
 const searchResults = document.querySelector(".results");
 const resList= document.querySelector(".search_results_list");
+const mapButton = document.getElementById("map"); // tällä saaa map buttonin toimimaan, kato lightbox täältä http://users.metropolia.fi/~janneval/media/viikko3.html
 
 searchForm.addEventListener("submit", e =>{
     e.preventDefault();
