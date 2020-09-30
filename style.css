@@ -1,5 +1,6 @@
 body {
-    background: rgb(198, 197, 185);
+    //background: rgb(198, 197, 185);
+    background: rgb(25, 25, 25);
     margin: 0 !important;
     padding: 0 !important;
 }
@@ -16,21 +17,29 @@ header {
     background-position: center;
     background-size: cover;
     position:relative;
+    //border-bottom: groove gold;
+    //border-left: groove gold;
+    //border-right: groove gold;
+
 }
 
 .random_food_trivia {
+    display: none;
     background: rgb(198, 197, 185);
+    margin: 0px 0px 0px 0px !important;
+
 }
 
 .search {
-
+    margin: 0px 0px 0px 0px
 }
 
-.logoPlaceHolder {
-    margin: 20px 0px 20px 0px;
+.logo {
+    margin: 0px 0px 0px 0px !important;
 }
 
 #map {
+    margin: 0px 0px 0px 0px !important;
 
 }
 
@@ -44,13 +53,20 @@ header {
     border-radius: 0px 0px 0px 25px;
     width: 25%;
     height: auto;
-    background: rgb(154, 152, 132);
+    min-height: 500px;
+    //background: rgb(154, 152, 132);
+    background: rgb(200, 197, 188);
+}
+
+ {
+    width: 25%;
 }
 
 .recipe{
     width: 50%;
     height: auto;
-    background: rgb(227, 227, 221);
+    //background: rgb(227, 227, 221);
+    background: rgb(237, 236, 233);
     text-align: center;
     position: relative;
 }
@@ -59,7 +75,9 @@ header {
     border-radius: 0px 0px 25px 0px;
     height: auto;
     width: 25%;
-    background: rgb(154, 152, 132);
+    //background: rgb(154, 152, 132);
+    background: rgb(200, 197, 188);
+
 }
 
 @media only screen and (max-width: 800px) {
@@ -72,4 +90,51 @@ header {
     .grocery {
         width: 100%;
     }
+}
+
+.search_results_list {
+    margin: 0px 25px 0px 25px;
+}
+
+.results_fig {
+    margin: 40px 25px 0px 25px;
+}
+
+.results_fig > img{
+    width: 100%;
+    //object-fit: contain;
+    border: groove;
+    border-color:rgb(47, 70, 76);
+}
+
+.results_name {
+    font-size: 25px;
+    text-align: center;
+    color: rgb(47, 70, 76);
+    text-decoration: underline;
+    text-decoration-color:rgb(47, 70, 76);
+}
+
+.results_author {
+    font-size: 15px;
+    text-align: center;
+    color: rgb(47, 70, 76);
+    text-decoration: underline;
+    text-decoration-color:rgb(47, 70, 76);
+}
+
+li {
+    list-style: none;
+}
+
+ul {
+    padding-inline-start: 0px;
+}
+
+.search_icon {
+}
+
+.shopping__delete {
+    width: 10px;
+    height: 10px;
 }
