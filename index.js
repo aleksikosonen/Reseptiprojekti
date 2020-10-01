@@ -109,31 +109,20 @@ async function controlRecipe(){
 
 //funktio valitun reseptin hakemiseksi ja renderöimiseksi
 function reseptiRender(id){
+    //haetaan APIsta reseptin tiedot käyttäen parametrina syötettiä reseptin IDtä
     const url = `https://forkify-api.herokuapp.com/api/get?rId=${id}`;
     fetch(url)
     .then(response =>response.json())
     .then((jsonData) => {
         console.log(jsonData);
-        jsonData.recipe;
-             const mark = `
-            <figure class="recipe_figure">
+        //kirjoitetaan HTMLään resepti
+        const mark = `
+        <figure class="recipe_figure">
             <img src="${jsonData.recipe.image_url}" alt="${jsonData.recipe.title}" class="recipe__img">
             <h1 class="recipe__title">
                 <span>${jsonData.recipe.title}</span>
             </h1>
         </figure>
-
-        <div class="recipe__details">
-            <div class="recipe__info">
-                <span class="recipe__info-data recipe__info-data--minutes">${/**recipe.time**/""}</span>
-                <span class="recipe__info-text"> minutes</span>
-            </div>
-            <div class="recipe__info">
-                <span class="recipe__info-data recipe__info-data--people"></span>
-                <span class="recipe__info-text"> servings</span>
-            </div>
-        </div>
-
         <div class="recipe__ingredients">
             <ul class="recipe__ingredient-list">
             ${jsonData.recipe.ingredients/**.map(el => createIngredient(el)).join('')**/}
