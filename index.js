@@ -18,6 +18,7 @@ searchForm.addEventListener("submit", e =>{
 //myös jos URLässä on hash jo valmiiksi, ja sivu ladataan, ajetaan funktio "controlRecipe"
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
 
+
 function clearInput(){
     //hakunkentän nollaamiseen käytettävä funktio
     searchInput.value = "";
@@ -32,11 +33,11 @@ function clearResults() {
 };
 
 
-
 //kumitetaan aikaisemmin kirjoitettu HTML tyhjäksi
 function clearRecipe() {
     recipe.innerHTML = "";
 };
+
 
 //Hakukoneiston ajamiseen tarkoitettu ohjelma
 async function searchControl() {
@@ -60,6 +61,7 @@ async function searchControl() {
     }
 };
 
+
 //asetetaan ohjeet hakukoineiston printtaamalle alueelle
 function guideText() {
     const mark = `
@@ -69,6 +71,7 @@ function guideText() {
         searchResults.insertAdjacentHTML('afterbegin', mark);
     }
 }    
+
 
 //funktio missä haetaan reseptejä APIsta ja kirjoitetaan hakukenttä alueeseen
 function reseptiHaku(query){
@@ -105,7 +108,6 @@ function reseptiHaku(query){
 }
 
 
-
 //funktio reseptien näyttämisen kontrolloimiseksi
 async function controlRecipe(){
     //luodaan Hashissä olevasta IDstä muuttuja jossa oleva # muutetaan tyhjäksi jotta
@@ -124,6 +126,7 @@ async function controlRecipe(){
     }
 
 };
+
 
 //funktio valitun reseptin hakemiseksi ja renderöimiseksi
 function reseptiRender(id){
@@ -172,13 +175,14 @@ function reseptiRender(id){
     });
 };
 
-//Navigoidaan sivu oikeaan näkymään
 
+//Navigoidaan sivu oikeaan näkymään
 function locate() {
     document.querySelector('.recipe').scrollIntoView({
         behavior: 'smooth'
     });
 };
+
 
 //funktio valmistusaineiden yhdistämiseksi
 function unifyIngredients(ingredient){
@@ -193,7 +197,6 @@ function unifyIngredients(ingredient){
         let ingredient = e.toLowerCase();
         longUnits.forEach((unit, i) => {
             ingredient = ingredient.replace(unit, shortUnit[i])
-
         });
 
         //poistetaan ylimääräiset sulut 
@@ -201,10 +204,44 @@ function unifyIngredients(ingredient){
 
         //pätkitään valmistusaineet määriin, mittayksiköihin sekä ainesosiin
         const arrIng = ingredient.split(" ");
-        const unitIndex = arrIng.findIndex(e2 => unitsshort.includes())
+        const unitIndex = arrIng.findIndex(e2 => unitsshort.includes(e2))
+        
+        let ingredientObject;
 
+        if (unitIndex > -1) {
+            // Valmistusaineessa on mittayksikkö
+            const arrCount = arrIng.slice(0, unitIndex);
+            let count;
 
-    }); 
+            if (arrCount.length === 1) {
+                count = eval(arrIng[0].replace('-', '+'));
+            } else {
+                count = eval(arrIng.slice(0, unitIndex).join('+'));
+            }
+
+            objIng = {
+                count,
+                unit: arrIng[unitIndex],
+                ingredient: arrIng.slice(unitIndex + 1).join(' ')
+            };
+
+        } else if (parseInt(arrIng[0], 10)) {
+            // Valmistusaineessa ei ole mittayksikköä mutta arrayn ensimmäinen elementti on numero
+            objIng = {
+                count: parseInt(arrIng[0], 10),
+                unit: '',
+                ingredient: arrIng.slice(1).join(' ')
+            }
+        } else if (unitIndex === -1) {
+            // Valmistusaineessa ei ole mittayksikköä eikä numeroa ensimmäisellä paikalla
+            objIng = {
+                count: 1,
+                unit: '',
+                ingredient
+            }
+        }
+        return ingredientObject;
+    }); return ingredientsNew;
 };
 
 
