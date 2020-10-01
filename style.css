@@ -105,6 +105,7 @@ header {
 
 .results_fig {
     margin: 40px 25px 0px 25px;
+
 }
 
 .results_fig > img{
@@ -112,6 +113,13 @@ header {
     width: 100%;
     object-fit: contain;
     //border: groove #AD974F;
+}
+
+.results_fig > img:hover{
+    border-radius: 10px;
+    width: 100%;
+    object-fit: contain;
+    box-shadow: 0 0 5px black;
 }
 
 .results_name {
