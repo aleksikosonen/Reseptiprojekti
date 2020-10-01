@@ -71,8 +71,16 @@
     .bindPopup('S-Market Lähderanta')
     .openPopup();
 
-    L.marker([60.240621,24.7405275]).addTo(map)
+    L.marker([60.2397483,24.7402199,21]).addTo(map)
+    .bindPopup('K-Supermarket Lähderanta')
+    .openPopup();
+
+    L.marker([60.2477948,24.7671133,21]).addTo(map)
     .bindPopup('K-Market Laaksolahti')
+    .openPopup();
+
+    L.marker([60.2297476,24.7160807,21]).addTo(map)
+    .bindPopup('K-Market Ravioli')
     .openPopup();
   }
   
