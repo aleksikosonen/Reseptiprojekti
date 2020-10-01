@@ -48,6 +48,7 @@ async function searchControl() {
 
         //haetaan reseptit
         try{
+            guideText();
             await reseptiHaku(input);
             //renderRecipe(etsiOhjelma(input));
             //renderöidään tulokset
@@ -58,6 +59,10 @@ async function searchControl() {
     }
 };
 
+function guideText() {
+    const mark = `Here you find the results, click one to see more info`;
+    searchResults.insertAdjacentHTML('afterbegin', mark);
+}    
 
 //funktio missä tehdään API hakuja ja kirjoitetaan hakukenttä alueeseen
 function reseptiHaku(query){
