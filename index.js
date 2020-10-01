@@ -62,7 +62,7 @@ function reseptiHaku(query){
     fetch(url)
     .then(response =>response.json())
     .then((jsonData) => {
-        console.log(jsonData);
+        //console.log(jsonData);
         jsonData.recipes;
         //return jsonData.recipes;
         jsonData.recipes.forEach(function(e){
@@ -90,7 +90,7 @@ async function controlRecipe(){
     //luodaan Hashissä olevasta IDstä muuttuja jossa oleva # muutetaan tyhjäksi jotta
     //pystymme lukemaan pelkkiä numeroita IDstä
     const id = window.location.hash.replace("#", "");
-
+    console.log(id);
     //jos löytyy ID niin toteutetaan seuraava osio
     if(id){
         //jos ID löytyy niin 
@@ -111,13 +111,11 @@ function reseptiRender(id){
     .then(response =>response.json())
     .then((jsonData) => {
         console.log(jsonData);
-        jsonData.recipes;
-        function write(e){
              const mark = `
             <figure class="recipe_figure">
-            <img src="${e.recipe.img}" alt="${e.recipe.title}" class="recipe__img">
+            <img src="${jsonData.recipe.img}" alt="${jsonData.recipe.title}" class="recipe__img">
             <h1 class="recipe__title">
-                <span>${e.recipe.title}</span>
+                <span>${jsonData.recipe.title}</span>
             </h1>
         </figure>
 
@@ -133,8 +131,6 @@ function reseptiRender(id){
                 <svg class="recipe__info-icon">
                     <use href="img/icons.svg#icon-man"></use>
                 </svg>
-                <span class="recipe__info-data recipe__info-data--people">${e.recipe.servings}</span>
-                <span class="recipe__info-text"> servings</span>
 
                 <div class="recipe__info-buttons">
                     <button class="btn-tiny btn-decrease">
@@ -154,7 +150,7 @@ function reseptiRender(id){
 
         <div class="recipe__ingredients">
             <ul class="recipe__ingredient-list">
-        ${e.recipe.ingredients/**.map(el => createIngredient(el)).join('')**/}
+        ${jsonData.recipe.ingredients/**.map(el => createIngredient(el)).join('')**/}
             </ul>
 
             <button class="btn-small recipe__btn recipe__btn--add">
@@ -169,9 +165,9 @@ function reseptiRender(id){
             <h2 class="heading-2">How to cook it</h2>
             <p class="recipe__directions-text">
                 This recipe was carefully designed and tested by
-                <span class="recipe__by">${e.recipe.author}</span>. Please check out directions at their website.
+                <span class="recipe__by">${jsonData.recipe.author}</span>. Please check out directions at their website.
             </p>
-            <a class="btn-small recipe__btn" href="${e.recipe.url}" target="_blank">
+            <a class="btn-small recipe__btn" href="${jsonData.recipe.url}" target="_blank">
                 <span>Directions</span>
                 <svg class="search__icon">
                     <use href="img/icons.svg#icon-triangle-right"></use>
@@ -181,6 +177,6 @@ function reseptiRender(id){
         </div>
             `;
             recipe.insertAdjacentHTML("afterbegin", mark);
-        };
-    });
+        });
+
 };
