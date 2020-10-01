@@ -53,11 +53,14 @@ header {
 .results{
     border-radius: 0px 0px 0px 25px;
     width: 24%;
-    height: auto;
-    min-height: 500px;
+    //height: auto;
     background: #EAEAEA;
     text-align: center;
+    height: 800px;
+    overflow: scroll;
 }
+
+
 
 .resultGuide {
     margin: 25px 25px 0px 25px;
@@ -69,7 +72,7 @@ header {
 
 .recipe{
     width: 50%;
-    height: auto;
+    //height: auto;
     //background: rgb(227, 227, 221);
     //background: rgb(237, 236, 233);
     background: #EAEAEA;
@@ -77,18 +80,20 @@ header {
     position: relative;
     border-left: groove #AD974F;
     border-right: groove #AD974F;
-
+    height: 800px;
+    overflow: scroll;
 }
 
 .grocery{
     text-align: center;
     border-radius: 0px 0px 25px 0px;
-    height: auto;
+    //height: auto;
     width: 25%;
     //background: rgb(154, 152, 132);
     //background: rgb(200, 197, 188);
     background: #EAEAEA;
-
+    height: 800px;
+    overflow: scroll;
 }
 
 @media only screen and (max-width: 800px) {
@@ -163,4 +168,16 @@ ul {
 .logo {
     background: transparent;
     border: none;
+}
+
+footer {
+    margin-top: 125px;
+    background: #8E793E;
+    width: 100%;
+    height: 200px;
+}
+
+#map {
+    width: 50%;
+    height: 50%;
 }
