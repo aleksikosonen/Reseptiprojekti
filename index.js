@@ -14,6 +14,7 @@ searchForm.addEventListener("submit", e =>{
 
 //luetaan kun URLässä oleva Hash muuttuu reseptin IDksi
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe()));
+window.onhashchange = controlRecipe;
 
 function clearInput(){
     //hakunkentän nollaamiseen käytettävä funktio
