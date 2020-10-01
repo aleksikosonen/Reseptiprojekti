@@ -5,6 +5,7 @@ const searchResults = document.querySelector(".results");
 const resList = document.querySelector(".search_results_list");
 const mapButton = document.getElementById("map"); // tällä saaa map buttonin toimimaan, kato lightbox täältä http://users.metropolia.fi/~janneval/media/viikko3.html
 const recipe = document.querySelector(".recipe");
+const logoButton = document.querySelector(".logo");
 
 //event listeneri hakukentälle
 searchForm.addEventListener("submit", e =>{
@@ -17,6 +18,12 @@ window.onhashchange = controlRecipe;
 //myös jos URLässä on hash jo valmiiksi, ja sivu ladataan, ajetaan funktio "controlRecipe"
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe()));
 
+//kun logoa painetaan päästään takaisin etusivulle
+logoButton.addEventListener("click", goHome);
+function goHome()
+{
+window.location.href="./index.html"
+}
 
 function clearInput(){
     //hakunkentän nollaamiseen käytettävä funktio
