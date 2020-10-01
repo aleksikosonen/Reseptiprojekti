@@ -13,7 +13,7 @@ header {
 .headerPhoto {
     background-image:url("headerImage1.jpg");
     width: 100%;
-    height: 275px;
+    height: 250px;
     background-position: center;
     background-size: cover;
     position:relative;
@@ -36,7 +36,7 @@ header {
 }
 
 .logo {
-    margin: 0px 0px 0px 0px !important;
+    margin: 0px 0px 15px 0px !important;
 }
 
 #map {
@@ -178,6 +178,7 @@ footer {
 }
 
 #map {
+
     width: 50%;
     height: 50%;
 }

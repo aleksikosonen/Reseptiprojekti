@@ -14,7 +14,7 @@ searchForm.addEventListener("submit", e =>{
 });
 
 //kun URLässä oleva hash muuttuu, ajetaan funktio "controlRecipe"
-window.onhashchange = controlRecipe;
+//window.onhashchange = controlRecipe;
 //myös jos URLässä on hash jo valmiiksi, ja sivu ladataan, ajetaan funktio "controlRecipe"
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
 
@@ -151,5 +151,6 @@ function reseptiRender(id){
         </div>
             `;
         recipe.insertAdjacentHTML("afterbegin", mark);
+        window.scrollTo(0,0);
     });
 };
