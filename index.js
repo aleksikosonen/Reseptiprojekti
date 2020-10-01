@@ -12,9 +12,11 @@ searchForm.addEventListener("submit", e =>{
     searchControl();
 });
 
-//luetaan kun URLässä oleva Hash muuttuu reseptin IDksi
-['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe()));
+//kun URLässä oleva hash muuttuu, ajetaan funktio "controlRecipe"
 window.onhashchange = controlRecipe;
+//myös jos URLässä on hash jo valmiiksi, ja sivu ladataan, ajetaan funktio "controlRecipe"
+['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe()));
+
 
 function clearInput(){
     //hakunkentän nollaamiseen käytettävä funktio
