@@ -5,6 +5,7 @@ const searchResults = document.querySelector(".results");
 const resList = document.querySelector(".search_results_list");
 const mapButton = document.getElementById("map"); // tällä saaa map buttonin toimimaan, kato lightbox täältä http://users.metropolia.fi/~janneval/media/viikko3.html
 const recipe = document.querySelector(".recipe");
+const logoButton = document.querySelector(".logo");
 
 //event listeneri hakukentälle
 searchForm.addEventListener("submit", e =>{
@@ -12,8 +13,17 @@ searchForm.addEventListener("submit", e =>{
     searchControl();
 });
 
-//luetaan kun URLässä oleva Hash muuttuu reseptin IDksi
+//kun URLässä oleva hash muuttuu, ajetaan funktio "controlRecipe"
+window.onhashchange = controlRecipe;
+//myös jos URLässä on hash jo valmiiksi, ja sivu ladataan, ajetaan funktio "controlRecipe"
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe()));
+
+//kun logoa painetaan päästään takaisin etusivulle
+logoButton.addEventListener("click", goHome);
+function goHome()
+{
+window.location.href="./index.html"
+}
 
 function clearInput(){
     //hakunkentän nollaamiseen käytettävä funktio
@@ -45,6 +55,7 @@ async function searchControl() {
 
         //haetaan reseptit
         try{
+            guideText();
             await reseptiHaku(input);
             //renderRecipe(etsiOhjelma(input));
             //renderöidään tulokset
@@ -55,6 +66,10 @@ async function searchControl() {
     }
 };
 
+function guideText() {
+    const mark = `Here you find the results, click one to see more info`;
+    searchResults.insertAdjacentHTML('afterbegin', mark);
+}    
 
 //funktio missä tehdään API hakuja ja kirjoitetaan hakukenttä alueeseen
 function reseptiHaku(query){
@@ -93,7 +108,7 @@ async function controlRecipe(){
 
     //jos löytyy ID niin toteutetaan seuraava osio
     if(id){
-        //jos ID löytyy niin 
+        //jos ID löytyy niin
         clearRecipe();
         try{
             reseptiRender(id);
@@ -106,31 +121,21 @@ async function controlRecipe(){
 
 //funktio valitun reseptin hakemiseksi ja renderöimiseksi
 function reseptiRender(id){
+    //haetaan APIsta reseptin tiedot käyttäen parametrina syötettiä reseptin IDtä
     const url = `https://forkify-api.herokuapp.com/api/get?rId=${id}`;
     fetch(url)
     .then(response =>response.json())
     .then((jsonData) => {
         console.log(jsonData);
-        jsonData.recipe;
-             const mark = `
-            <figure class="recipe_figure">
+        //kirjoitetaan HTMLään resepti
+
+        const mark = `
+        <figure class="recipe_figure">
             <img src="${jsonData.recipe.image_url}" alt="${jsonData.recipe.title}" class="recipe__img">
             <h1 class="recipe__title">
                 <span>${jsonData.recipe.title}</span>
             </h1>
         </figure>
-
-        <div class="recipe__details">
-            <div class="recipe__info">
-                <span class="recipe__info-data recipe__info-data--minutes">${/**recipe.time**/""}</span>
-                <span class="recipe__info-text"> minutes</span>
-            </div>
-            <div class="recipe__info">
-                <span class="recipe__info-data recipe__info-data--people"></span>
-                <span class="recipe__info-text"> servings</span>
-            </div>
-        </div>
-
         <div class="recipe__ingredients">
             <ul class="recipe__ingredient-list">
             ${jsonData.recipe.ingredients/**.map(el => createIngredient(el)).join('')**/}
@@ -151,6 +156,6 @@ function reseptiRender(id){
             </a>
         </div>
             `;
-            recipe.insertAdjacentHTML("afterbegin", mark);
-        });
+        recipe.insertAdjacentHTML("afterbegin", mark);
+    });
 };
