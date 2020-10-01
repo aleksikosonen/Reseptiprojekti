@@ -13,7 +13,7 @@ header {
 .headerPhoto {
     background-image:url("headerImage1.jpg");
     width: 100%;
-    height: 250px;
+    height: 275px;
     background-position: center;
     background-size: cover;
     position:relative;
@@ -51,11 +51,12 @@ header {
 
 .results{
     border-radius: 0px 0px 0px 25px;
-    width: 25%;
+    width: 24%;
     height: auto;
     min-height: 500px;
     //background: rgb(154, 152, 132);
-    background: rgb(200, 197, 188);
+    //background: rgb(200, 197, 188);
+    background: #EAEAEA;
 }
 
  {
@@ -66,17 +67,23 @@ header {
     width: 50%;
     height: auto;
     //background: rgb(227, 227, 221);
-    background: rgb(237, 236, 233);
+    //background: rgb(237, 236, 233);
+    background: #EAEAEA;
     text-align: center;
     position: relative;
+    border-left: groove #AD974F;
+    border-right: groove #AD974F;
+
 }
 
 .grocery{
+    text-align: center;
     border-radius: 0px 0px 25px 0px;
     height: auto;
     width: 25%;
     //background: rgb(154, 152, 132);
-    background: rgb(200, 197, 188);
+    //background: rgb(200, 197, 188);
+    background: #EAEAEA;
 
 }
 
@@ -101,16 +108,17 @@ header {
 }
 
 .results_fig > img{
+    border-radius: 10px;
     width: 100%;
-    //object-fit: contain;
-    border: groove;
-    border-color:rgb(47, 70, 76);
+    object-fit: contain;
+    //border: groove #AD974F;
 }
 
 .results_name {
     font-size: 25px;
     text-align: center;
-    color: rgb(47, 70, 76);
+    //color: rgb(47, 70, 76);
+    color: #231F20;
     text-decoration: underline;
     text-decoration-color:rgb(47, 70, 76);
 }
@@ -118,7 +126,8 @@ header {
 .results_author {
     font-size: 15px;
     text-align: center;
-    color: rgb(47, 70, 76);
+    //color: rgb(47, 70, 76);
+    color: #231F20;
     text-decoration: underline;
     text-decoration-color:rgb(47, 70, 76);
 }
