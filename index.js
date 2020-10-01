@@ -89,6 +89,9 @@ function reseptiHaku(query){
         </li>
     `;
             resList.insertAdjacentHTML("beforeend", mark);
+            if (window.outerWidth>=1000) {
+                locate();
+            }
         })
     });
 }
@@ -151,8 +154,18 @@ function reseptiRender(id){
         </div>
             `;
         recipe.insertAdjacentHTML("afterbegin", mark);
-        window.scrollTo(0,0);
+        /*window.scrollTo({
+            top: 250,
+            behavior: 'smooth'
+        });*/
+        locate();
     });
 };
 
- 
+//Navigoidaan sivu oikeaan näkymään
+
+function locate() {
+    document.querySelector('.recipe').scrollIntoView({
+        behavior: 'smooth'
+    });
+}

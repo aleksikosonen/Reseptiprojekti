@@ -20,8 +20,7 @@ header {
     //border-bottom: groove gold;
     //border-left: groove gold;
     //border-right: groove gold;
-    //box-shadow: 0 0 10px;
-
+    box-shadow:0px 0px 10px 1px black;
 }
 
 .random_food_trivia {
@@ -41,7 +40,6 @@ header {
 
 #map {
     margin: 0px 0px 0px 0px !important;
-
 }
 
 #page-container{
@@ -52,22 +50,17 @@ header {
 
 .results{
     border-radius: 0px 0px 0px 25px;
-    width: 24%;
+    width: 25%;
     //height: auto;
     background: #EAEAEA;
     text-align: center;
     height: 800px;
     overflow: scroll;
+    box-shadow:0px 0px 0px 1px #8E793E inset;
 }
-
-
 
 .resultGuide {
     margin: 25px 25px 0px 25px;
-}
-
- {
-    width: 25%;
 }
 
 .recipe{
@@ -78,8 +71,9 @@ header {
     background: #EAEAEA;
     text-align: center;
     position: relative;
-    border-left: groove #AD974F;
-    border-right: groove #AD974F;
+    //border-left: groove #AD974F;
+    //border-right: groove #AD974F;
+    box-shadow:0px 0px 0px 1px #8E793E inset;
     height: 800px;
     overflow: scroll;
 }
@@ -94,17 +88,23 @@ header {
     background: #EAEAEA;
     height: 800px;
     overflow: scroll;
+    box-shadow:0px 0px 0px 1px #8E793E inset;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1000px) {
     .results  {
         width: 100%;
+        border-radius: 0px 0px 25px 25px;
+
     }
     .recipe {
         width: 100%;
+        border-radius: 25px 25px 25px 25px;
+        border: none;
     }
     .grocery {
         width: 100%;
+        border-radius: 25px 25px 25px 25px;
     }
 }
 
@@ -181,4 +181,20 @@ footer {
 
     width: 50%;
     height: 50%;
+}
+
+.recipe_figure > img{
+    border-radius: 10px;
+    width: 100%;
+    object-fit: contain;
+    margin-top: 30px;
+}
+
+.recipe__ingredient-list {
+    margin: 0px 50px 0px 50px;
+}
+
+.recipe__directions-text {
+    margin: 0px 50px 0px 50px;
+
 }
