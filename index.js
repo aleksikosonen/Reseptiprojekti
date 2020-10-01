@@ -18,13 +18,6 @@ window.onhashchange = controlRecipe;
 //myös jos URLässä on hash jo valmiiksi, ja sivu ladataan, ajetaan funktio "controlRecipe"
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe()));
 
-//kun logoa painetaan päästään takaisin etusivulle
-logoButton.addEventListener("click", goHome);
-function goHome()
-{
-window.location.href="./index.html"
-}
-
 function clearInput(){
     //hakunkentän nollaamiseen käytettävä funktio
     searchInput.value = "";
