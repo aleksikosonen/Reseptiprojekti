@@ -55,9 +55,12 @@ header {
     width: 24%;
     height: auto;
     min-height: 500px;
-    //background: rgb(154, 152, 132);
-    //background: rgb(200, 197, 188);
     background: #EAEAEA;
+    text-align: center;
+}
+
+.resultGuide {
+    margin: 25px 25px 0px 25px;
 }
 
  {

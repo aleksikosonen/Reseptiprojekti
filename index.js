@@ -67,7 +67,8 @@ async function searchControl() {
 };
 
 function guideText() {
-    const mark = `Here you find the results, click one to see more info`;
+    const mark = `
+            <p class="resultGuide">Here you have the results, click one to see more</p>`
     searchResults.insertAdjacentHTML('afterbegin', mark);
 }    
 
