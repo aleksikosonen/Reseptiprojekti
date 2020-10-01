@@ -155,3 +155,8 @@ ul {
     width: 10px;
     height: 10px;
 }
+
+.logo {
+    background: transparent;
+    border: none;
+}
