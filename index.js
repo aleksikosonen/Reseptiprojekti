@@ -6,6 +6,7 @@ const resList = document.querySelector(".search_results_list");
 const mapButton = document.getElementById("map"); // tällä saaa map buttonin toimimaan, kato lightbox täältä http://users.metropolia.fi/~janneval/media/viikko3.html
 const recipe = document.querySelector(".recipe");
 const logoButton = document.querySelector(".logo");
+const shoppinList = document.querySelector('.shopping__description');
 
 //event listeneri hakukentälle
 searchForm.addEventListener("submit", e =>{
@@ -102,7 +103,7 @@ function reseptiHaku(query){
         })
     })
     .catch((error) => {
-        alert("Could not process the request, please try again.") 
+        alert("Oops! We couldn't find anything with your search :( You can try again (try searching for example lamb or ice cream!)")
     });
         
 }
@@ -138,7 +139,11 @@ function reseptiRender(id){
     .then((jsonData) => {
         console.log(jsonData);
         //kirjoitetaan HTMLään resepti
-
+        ingredientArray = [];
+        arvo = Object.keys(jsonData.recipe.ingredients).length;
+        for (let i=0; i<arvo; i++) {
+            ingredientArray[i] = jsonData.recipe.ingredients[i];
+        }
         const mark = `
         <figure class="recipe_figure">
             <img src="${jsonData.recipe.image_url}" alt="${jsonData.recipe.title}" class="recipe__img">
@@ -148,8 +153,12 @@ function reseptiRender(id){
         </figure>
         <div class="recipe__ingredients">
             <ul class="recipe__ingredient-list">
-            ${jsonData.recipe.ingredients/**.map(JSON.parse(jsonData) => createIngredient(el)).join('')**/}
+                <!--${jsonData.recipe.ingredients/**.map(JSON.parse(jsonData) => createIngredient(el)).join('')**/}-->
+                ${ingredientArray}
             </ul>
+            <div>
+            <button id="addToCart">Add ingredients to cart</button>
+            </div>
         </div>
 
         <div class="recipe__directions">
@@ -158,6 +167,7 @@ function reseptiRender(id){
                 This recipe was carefully designed and tested by
                 <span class="recipe__by">${jsonData.recipe.publisher}</span>. Please check out directions at their website.
             </p>
+        
             <a class="btn-small recipe__btn" href="${jsonData.recipe.source_url}" target="_blank">
                 <span>Directions</span>
                 <svg class="search__icon">
@@ -167,10 +177,6 @@ function reseptiRender(id){
         </div>
             `;
         recipe.insertAdjacentHTML("afterbegin", mark);
-        /*window.scrollTo({
-            top: 250,
-            behavior: 'smooth'
-        });*/
         locate();
     });
 };
@@ -182,18 +188,6 @@ function locate() {
         behavior: 'smooth'
     });
 }
-
-/*window.onscroll = function() {scrollFunction()};
-
-function scrollFunction() {
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        document.querySelector('.headerPhoto').style.height = "0px";
-        locate();
-    } else {
-        document.querySelector('.headerPhoto').style.height = "500px";
-    }
-}*/
-
 
 //funktio valmistusaineiden yhdistämiseksi
 function unifyIngredients(ingredient){
@@ -276,3 +270,14 @@ function openInPage() {
     window.alert(kartta.html);
 }*/
 
+//Funktio ingridientsin käsittelyyn, jatketaan tästä maanantaina
+
+const groButton = document.querySelector('.shopping__delete');
+groButton.addEventListener('click', addIngridients);
+
+function addIngridients() {
+    shoppinList.innerHTML='';
+    for (let i=0; i<ingredientArray.length;i++) {
+        shoppinList.innerHTML += '<li>' + ingredientArray[i] + '</li>';
+    }
+}
