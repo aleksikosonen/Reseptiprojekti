@@ -269,3 +269,10 @@ function createIngredient(ingredient) {`
     </li>
 `};
 
+/*const mapButton2 = document.querySelector('.mapButton2');
+mapButton2.addEventListener('onclick', openInPage);
+
+function openInPage() {
+    window.alert(kartta.html);
+}*/
+
