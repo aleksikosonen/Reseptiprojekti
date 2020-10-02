@@ -215,11 +215,41 @@ footer {
 
 }
 
-#mapButton2 {
-    display: flex;
-    width: 6em;
-    border: 2px white;
-    background: #ffe;
+#mapButton {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    font-size: 16px;
+    padding: 5px 15px 5px 15px;
+}
+
+#mapButton:hover {
+    box-shadow: 0 0 4px white;
+}
+
+#creatorsButton {
+    margin: 33px 25px 0px 25px;
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    font-size: 16px;
+    padding: 5px 15px 5px 15px;
+}
+
+#creatorsButton:hover {
+    box-shadow: 0 0 4px white;
+}
+
+#galleryButton {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    font-size: 16px;
+    padding: 5px 15px 4px 15px;
+}
+
+#galleryButton:hover {
+    box-shadow: 0 0 2px white;
 }
 
 #video {
@@ -260,7 +290,14 @@ footer {
 #galleryText {
     color: #AD974F;
     font-family: Baskerville;
+}
 
+.logoGallery {
+    display: flex;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
 }
 
 /*a {
