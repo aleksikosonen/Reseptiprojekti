@@ -169,3 +169,14 @@ function locate() {
         behavior: 'smooth'
     });
 }
+
+/*window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        document.querySelector('.headerPhoto').style.height = "0px";
+        locate();
+    } else {
+        document.querySelector('.headerPhoto').style.height = "500px";
+    }
+}*/

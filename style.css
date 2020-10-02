@@ -21,6 +21,8 @@ header {
     //border-left: groove gold;
     //border-right: groove gold;
     box-shadow:0px 0px 10px 1px black;
+    transition: 1s;
+
 }
 
 .random_food_trivia {
