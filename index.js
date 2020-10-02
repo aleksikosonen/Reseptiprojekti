@@ -1,7 +1,7 @@
 //muuttujia DOM metodeille
 const searchInput = document.querySelector(".search_field");
 const searchForm = document.querySelector(".search");
-const searchResults = document.querySelector(".results");
+const searchResults = document.querySelector(".resultGuide");
 const resList = document.querySelector(".search_results_list");
 const mapButton = document.getElementById("map"); // tällä saaa map buttonin toimimaan, kato lightbox täältä http://users.metropolia.fi/~janneval/media/viikko3.html
 const recipe = document.querySelector(".recipe");
@@ -18,6 +18,7 @@ searchForm.addEventListener("submit", e =>{
 //myös jos URLässä on hash jo valmiiksi, ja sivu ladataan, ajetaan funktio "controlRecipe"
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
 
+
 function clearInput(){
     //hakunkentän nollaamiseen käytettävä funktio
     searchInput.value = "";
@@ -28,20 +29,21 @@ const getInput = () => searchInput.value;
 
 //kumitetaan vanhat tulokset pois
 function clearResults() {
-    resList.innerHTML ="";
+    resList.innerHTML = "";
 };
+
 
 //kumitetaan aikaisemmin kirjoitettu HTML tyhjäksi
 function clearRecipe() {
     recipe.innerHTML = "";
 };
 
+
 //Hakukoneiston ajamiseen tarkoitettu ohjelma
 async function searchControl() {
     //haetaan näkymästä input
     const input = getInput();
     if(input){
-        //luodaan uusi haku olio
         //valmistellaan UI
         clearResults();
         clearInput();
@@ -49,23 +51,29 @@ async function searchControl() {
         //haetaan reseptit
         try{
             guideText();
-            await reseptiHaku(input);
+            reseptiHaku(input);
             //renderRecipe(etsiOhjelma(input));
             //renderöidään tulokset
 
         }catch(error){
-            alert("Something went wrong again");
+            alert("Something went wrong while searching for recipes");
         }
     }
 };
 
+
+//asetetaan ohjeet hakukoineiston printtaamalle alueelle
 function guideText() {
     const mark = `
-            <p class="resultGuide">Here you have the results, click one to see more</p>`
-    searchResults.insertAdjacentHTML('afterbegin', mark);
+            <p class="resultGuide">Here you have the results, click one to see more</p>
+            `
+    if (searchResults.innerHTML.length < 1){      
+        searchResults.insertAdjacentHTML('afterbegin', mark);
+    }
 }    
 
-//funktio missä tehdään API hakuja ja kirjoitetaan hakukenttä alueeseen
+
+//funktio missä haetaan reseptejä APIsta ja kirjoitetaan hakukenttä alueeseen
 function reseptiHaku(query){
     const url = `https://forkify-api.herokuapp.com/api/search?q=${query}`;
     fetch(url)
@@ -73,7 +81,6 @@ function reseptiHaku(query){
     .then((jsonData) => {
         console.log(jsonData);
         jsonData.recipes;
-        //return jsonData.recipes;
         jsonData.recipes.forEach(function(e){
             const mark = `
         <li>
@@ -93,7 +100,11 @@ function reseptiHaku(query){
                 locate();
             }
         })
+    })
+    .catch((error) => {
+        alert("Could not process the request, please try again.") 
     });
+        
 }
 
 
@@ -116,12 +127,14 @@ async function controlRecipe(){
 
 };
 
+
 //funktio valitun reseptin hakemiseksi ja renderöimiseksi
 function reseptiRender(id){
     //haetaan APIsta reseptin tiedot käyttäen parametrina syötettiä reseptin IDtä
     const url = `https://forkify-api.herokuapp.com/api/get?rId=${id}`;
     fetch(url)
     .then(response =>response.json())
+    
     .then((jsonData) => {
         console.log(jsonData);
         //kirjoitetaan HTMLään resepti
@@ -135,7 +148,7 @@ function reseptiRender(id){
         </figure>
         <div class="recipe__ingredients">
             <ul class="recipe__ingredient-list">
-            ${jsonData.recipe.ingredients/**.map(el => createIngredient(el)).join('')**/}
+            ${jsonData.recipe.ingredients/**.map(JSON.parse(jsonData) => createIngredient(el)).join('')**/}
             </ul>
         </div>
 
@@ -162,8 +175,8 @@ function reseptiRender(id){
     });
 };
 
-//Navigoidaan sivu oikeaan näkymään
 
+//Navigoidaan sivu oikeaan näkymään
 function locate() {
     document.querySelector('.recipe').scrollIntoView({
         behavior: 'smooth'
@@ -180,3 +193,79 @@ function scrollFunction() {
         document.querySelector('.headerPhoto').style.height = "500px";
     }
 }*/
+
+
+//funktio valmistusaineiden yhdistämiseksi
+function unifyIngredients(ingredient){
+    /**tehdään kaksi arrayta, missä ensimmäisessä on resepteissä löydetyissä muodoissa olevat mittayksiköt
+     * sen jälkeen tehdään array missä muodossa halutaan ne esittää
+**/
+    const longUnits = ["tablespoons", "tablespoon", "ounces", "ounce", "teaspoons", "teaspoon", "cups", "pounds"];
+    const shortUnits = ["tbsp", "tbsp", "oz", "oz", "tsp", "tsp", "cup", "pound"];
+    
+    //funktio millä muutetaan valmistusaineet array muotoon, eritellään määrät, mittayksiköt sekä ainesosat
+    const ingredientsNew = ingredient.map(e => {
+        let ingredient = e.toLowerCase();
+        longUnits.forEach((unit, i) => {
+            ingredient = ingredient.replace(unit, shortUnit[i])
+        });
+
+        //poistetaan ylimääräiset sulut 
+        ingredient = ingredient.replace(/ *\([^)]*\) */g, " ");
+
+        //pätkitään valmistusaineet määriin, mittayksiköihin sekä ainesosiin
+        const arrIng = ingredient.split(" ");
+        const unitIndex = arrIng.findIndex(e2 => unitsshort.includes(e2))
+        
+        let ingredientObject;
+
+        if (unitIndex > -1) {
+            // Valmistusaineessa on mittayksikkö
+            const arrCount = arrIng.slice(0, unitIndex);
+            let count;
+
+            if (arrCount.length === 1) {
+                count = eval(arrIng[0].replace('-', '+'));
+            } else {
+                count = eval(arrIng.slice(0, unitIndex).join('+'));
+            }
+
+            objIng = {
+                count,
+                unit: arrIng[unitIndex],
+                ingredient: arrIng.slice(unitIndex + 1).join(' ')
+            };
+
+        } else if (parseInt(arrIng[0], 10)) {
+            // Valmistusaineessa ei ole mittayksikköä mutta arrayn ensimmäinen elementti on numero
+            objIng = {
+                count: parseInt(arrIng[0], 10),
+                unit: '',
+                ingredient: arrIng.slice(1).join(' ')
+            }
+        } else if (unitIndex === -1) {
+            // Valmistusaineessa ei ole mittayksikköä eikä numeroa ensimmäisellä paikalla
+            objIng = {
+                count: 1,
+                unit: '',
+                ingredient
+            }
+        }
+        return ingredientObject;
+    }); return ingredientsNew;
+};
+
+
+function createIngredient(ingredient) {`
+    <li class="recipe__item">
+        <svg class="recipe__icon">
+            <use href="img/icons.svg#icon-check"></use>
+        </svg>
+        <div class="recipe__count">${formatCount(ingredient.count)}</div>
+        <div class="recipe__ingredient">
+            <span class="recipe__unit">${ingredient.unit}</span>
+            ${ingredient.ingredient}
+        </div>
+    </li>
+`};
+
