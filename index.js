@@ -14,7 +14,7 @@ searchForm.addEventListener("submit", e =>{
 });
 
 //kun URLässä oleva hash muuttuu, ajetaan funktio "controlRecipe"
-window.onhashchange = controlRecipe;
+//window.onhashchange = controlRecipe;
 //myös jos URLässä on hash jo valmiiksi, ja sivu ladataan, ajetaan funktio "controlRecipe"
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
 
@@ -54,7 +54,7 @@ async function searchControl() {
             //renderöidään tulokset
 
         }catch(error){
-            alert("Something went wrong again");
+            alert("Something went wrong");
         }
     }
 };
@@ -72,8 +72,6 @@ function reseptiHaku(query){
     .then(response =>response.json())
     .then((jsonData) => {
         console.log(jsonData);
-        jsonData.recipes;
-        //return jsonData.recipes;
         jsonData.recipes.forEach(function(e){
             const mark = `
         <li>
@@ -89,8 +87,12 @@ function reseptiHaku(query){
         </li>
     `;
             resList.insertAdjacentHTML("beforeend", mark);
+        }).catch( () => {
+            alert("something went wrong!")
         })
+    
     });
+    
 }
 
 
