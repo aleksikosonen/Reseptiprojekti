@@ -7,6 +7,12 @@ const mapButton = document.getElementById("map"); // tällä saaa map buttonin t
 const recipe = document.querySelector(".recipe");
 const logoButton = document.querySelector(".logo");
 const shoppinList = document.querySelector('.shopping__description');
+const addToList = document.getElementById("addToList");
+
+
+//2 Globaalia muuttujaa reseptien ainesosien pätkimistä varten
+let ingredientsData;
+let unifiedIngredients;
 
 //event listeneri hakukentälle
 searchForm.addEventListener("submit", e =>{
@@ -135,12 +141,12 @@ function reseptiRender(id){
     const url = `https://forkify-api.herokuapp.com/api/get?rId=${id}`;
     fetch(url)
     .then(response =>response.json())
-    
     .then((jsonData) => {
-        console.log(jsonData);
         //kirjoitetaan HTMLään resepti
         ingredientArray = [];
         arvo = Object.keys(jsonData.recipe.ingredients).length;
+        ingredientsData = jsonData.recipe.ingredients;
+        unifiedIngredients = unifyIngredients();
         for (let i=0; i<arvo; i++) {
             ingredientArray[i] = jsonData.recipe.ingredients[i];
         }
@@ -153,14 +159,13 @@ function reseptiRender(id){
         </figure>
         <div class="recipe__ingredients">
             <ul class="recipe__ingredient-list">
-                <!--${jsonData.recipe.ingredients/**.map(JSON.parse(jsonData) => createIngredient(el)).join('')**/}-->
-                ${ingredientArray}
+                ${unifiedIngredients.map(el => createIngredient(el)).join('')}
             </ul>
             <div>
-            <button id="addToCart">Add ingredients to cart</button>
+            <button id="addToList">Add ingredients to shopping list</button>
             </div>
         </div>
-
+ 
         <div class="recipe__directions">
             <h2 class="heading-2">How to cook it</h2>
             <p class="recipe__directions-text">
@@ -172,7 +177,7 @@ function reseptiRender(id){
                 <span>Directions</span>
                 <svg class="search__icon">
                 </svg>
-
+ 
             </a>
         </div>
             `;
@@ -183,85 +188,88 @@ function reseptiRender(id){
 
 
 //Navigoidaan sivu oikeaan näkymään
-function locate() {
+ function locate() {
     document.querySelector('.recipe').scrollIntoView({
         behavior: 'smooth'
     });
 }
 
+
 //funktio valmistusaineiden yhdistämiseksi
-function unifyIngredients(ingredient){
+ function unifyIngredients(){
     /**tehdään kaksi arrayta, missä ensimmäisessä on resepteissä löydetyissä muodoissa olevat mittayksiköt
-     * sen jälkeen tehdään array missä muodossa halutaan ne esittää
-**/
+     * sen jälkeen tehdään array missä muodossa halutaan ne esittää**/
+
     const longUnits = ["tablespoons", "tablespoon", "ounces", "ounce", "teaspoons", "teaspoon", "cups", "pounds"];
     const shortUnits = ["tbsp", "tbsp", "oz", "oz", "tsp", "tsp", "cup", "pound"];
     
-    //funktio millä muutetaan valmistusaineet array muotoon, eritellään määrät, mittayksiköt sekä ainesosat
-    const ingredientsNew = ingredient.map(e => {
-        let ingredient = e.toLowerCase();
-        longUnits.forEach((unit, i) => {
-            ingredient = ingredient.replace(unit, shortUnit[i])
-        });
+        console.log(ingredientsData);
+        //funktio millä muutetaan valmistusaineet array muotoon, eritellään määrät, mittayksiköt sekä ainesosat
+        const ingredientsNew = ingredientsData.map(e => {
+            
+            let ingredient = e.toLowerCase();
+            longUnits.forEach((unit, i) => {
+                ingredient = ingredient.replace(unit, shortUnits[i])
+            });
+            //poistetaan ylimääräiset sulut 
+            ingredient = ingredient.replace(/ *\([^)]*\) */g, " ");
 
-        //poistetaan ylimääräiset sulut 
-        ingredient = ingredient.replace(/ *\([^)]*\) */g, " ");
+            //pätkitään valmistusaineet määriin, mittayksiköihin sekä ainesosiin
+            const arrIng = ingredient.split(" ");
+            const unitIndex = arrIng.findIndex(e2 => shortUnits.includes(e2))
+            
+            let ingredientObject;
 
-        //pätkitään valmistusaineet määriin, mittayksiköihin sekä ainesosiin
-        const arrIng = ingredient.split(" ");
-        const unitIndex = arrIng.findIndex(e2 => unitsshort.includes(e2))
+            if (unitIndex > -1) {
+                // Valmistusaineessa on mittayksikkö
+                const arrCount = arrIng.slice(0, unitIndex);
+                let count;
+
+                if (arrCount.length === 1) {
+                    count = eval(arrIng[0].replace('-', '+'));
+                } else {
+                    count = eval(arrIng.slice(0, unitIndex).join('+'));
+                }
+
+                ingredientObject = {
+                    count,
+                    unit: arrIng[unitIndex],
+                    ingredient: arrIng.slice(unitIndex + 1).join(' ')
+                };
+
+            } else if (parseInt(arrIng[0], 10)) {
+                // Valmistusaineessa ei ole mittayksikköä mutta arrayn ensimmäinen elementti on numero
+                ingredientObject = {
+                    count: parseInt(arrIng[0], 10),
+                    unit: '',
+                    ingredient: arrIng.slice(1).join(' ')
+                }
+            } else if (unitIndex === -1) {
+                // Valmistusaineessa ei ole mittayksikköä eikä numeroa ensimmäisellä paikalla
+                ingredientObject = {
+                    count: "",
+                    unit: '',
+                    ingredient
+                }
+            }
+            return ingredientObject;
+        }); return ingredientsNew;
         
-        let ingredientObject;
-
-        if (unitIndex > -1) {
-            // Valmistusaineessa on mittayksikkö
-            const arrCount = arrIng.slice(0, unitIndex);
-            let count;
-
-            if (arrCount.length === 1) {
-                count = eval(arrIng[0].replace('-', '+'));
-            } else {
-                count = eval(arrIng.slice(0, unitIndex).join('+'));
-            }
-
-            objIng = {
-                count,
-                unit: arrIng[unitIndex],
-                ingredient: arrIng.slice(unitIndex + 1).join(' ')
-            };
-
-        } else if (parseInt(arrIng[0], 10)) {
-            // Valmistusaineessa ei ole mittayksikköä mutta arrayn ensimmäinen elementti on numero
-            objIng = {
-                count: parseInt(arrIng[0], 10),
-                unit: '',
-                ingredient: arrIng.slice(1).join(' ')
-            }
-        } else if (unitIndex === -1) {
-            // Valmistusaineessa ei ole mittayksikköä eikä numeroa ensimmäisellä paikalla
-            objIng = {
-                count: 1,
-                unit: '',
-                ingredient
-            }
-        }
-        return ingredientObject;
-    }); return ingredientsNew;
 };
 
 
-function createIngredient(ingredient) {`
-    <li class="recipe__item">
-        <svg class="recipe__icon">
-            <use href="img/icons.svg#icon-check"></use>
-        </svg>
-        <div class="recipe__count">${formatCount(ingredient.count)}</div>
-        <div class="recipe__ingredient">
-            <span class="recipe__unit">${ingredient.unit}</span>
-            ${ingredient.ingredient}
-        </div>
-    </li>
-`};
+const createIngredient = ingredient => `
+<li class="recipe__item">
+    <svg class="recipe__icon">
+        <use href="img/icons.svg#icon-check"></use>
+    </svg>
+    <div class="recipe__count">${ingredient.count}</div>
+    <div class="recipe__ingredient">
+        <span class="recipe__unit">${ingredient.unit}</span>
+        ${ingredient.ingredient}
+    </div>
+</li>
+`;
 
 /*const mapButton2 = document.querySelector('.mapButton2');
 mapButton2.addEventListener('onclick', openInPage);
@@ -281,3 +289,50 @@ function addIngridients() {
         shoppinList.innerHTML += '<li>' + ingredientArray[i] + '</li>';
     }
 }
+ 
+
+/**  nikon sunnuntai säädöt, katotaan maanantaina
+ * let shopListItems = [];
+
+item = {
+    id: random(),
+    count,
+    unit,
+    ingredient
+}
+
+function ostosLista(count, unit, ingredient) {
+ item = {
+     id: random(),
+     count,
+     unit,
+     ingredient
+ }
+    shopListItems.push(item);
+    return item;
+};
+
+deleteItem(id){
+    const index = shopListItems.findIndex(el => el.id === id);
+    shopListItems.splice(index, 1);
+}
+
+export const renderItem = item => {
+    const markup = `
+        <li class="shopping__item" data-itemid=${item.id}>
+            <div class="shopping__count">
+                <input type="number" value="${item.count}" step="${item.count}" class="shopping__count-value">
+                <p>${item.unit}</p>
+            </div>
+            <p class="shopping__description">${item.ingredient}</p>
+            <button class="shopping__delete btn-tiny">
+                <svg>
+                    <use href="img/icons.svg#icon-circle-with-cross"></use>
+                </svg>
+            </button>
+        </li>
+    `;
+    elements.shopping.insertAdjacentHTML('beforeend', markup);
+};
+ * 
+ */
