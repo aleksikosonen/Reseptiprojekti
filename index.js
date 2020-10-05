@@ -253,8 +253,8 @@ function reseptiRender(id){
         
 };
 
-
 //funktio millä kirjoitetaan HTMLään reseptin ainesosat
+
 const createIngredient = ingredient => `
 <li class="recipe__item">
     <div class="recipe__count">${ingredient.count}</div>
@@ -296,7 +296,6 @@ function ostosLista (count, unit, ingredient) {
  }
     return item;
 };
-
 
 function deleteItem(id){
     console.log(id);
