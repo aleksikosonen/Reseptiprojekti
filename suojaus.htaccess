@@ -1,4 +1,4 @@
 AuthType Basic  
 AuthName "restricted area"  
-AuthUserFile \C:\Users\herma\reseptiprojekti\Reseptiprojekti\kuvat\.htpasswd  
+AuthUserFile ./kuvat/.htpasswd  
 require valid-user
