@@ -89,7 +89,5 @@
     console.warn(`ERROR(${err.code}): ${err.message}`);
   }
 
-
-  
   // Käynnistetään paikkatietojen haku
   navigator.geolocation.getCurrentPosition(success, error, options);

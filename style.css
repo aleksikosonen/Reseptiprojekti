@@ -1,5 +1,4 @@
 body {
-    //background: rgb(198, 197, 185);
     background: rgb(25, 25, 25);
     margin: 0 !important;
     padding: 0 !important;
@@ -13,14 +12,12 @@ header {
 .headerPhoto {
     background-image:url("headerImage1.jpg");
     width: 100%;
-    height: 275px;
+    height: 250px;
     background-position: center;
     background-size: cover;
     position:relative;
-    //border-bottom: groove gold;
-    //border-left: groove gold;
-    //border-right: groove gold;
-    //box-shadow: 0 0 10px;
+    box-shadow:0px 0px 10px 1px black;
+    transition: 1s;
 
 }
 
@@ -36,12 +33,11 @@ header {
 }
 
 .logo {
-    margin: 0px 0px 0px 0px !important;
+    margin: 0px 0px 15px 0px !important;
 }
 
 #map {
     margin: 0px 0px 0px 0px !important;
-
 }
 
 #page-container{
@@ -52,34 +48,24 @@ header {
 
 .results{
     border-radius: 0px 0px 0px 25px;
-    width: 24%;
-    //height: auto;
+    width: 25%;
     background: #EAEAEA;
     text-align: center;
     height: 800px;
     overflow: scroll;
+    box-shadow:0px 0px 0px 1px #8E793E inset;
 }
-
-
 
 .resultGuide {
     margin: 25px 25px 0px 25px;
 }
 
- {
-    width: 25%;
-}
-
 .recipe{
     width: 50%;
-    //height: auto;
-    //background: rgb(227, 227, 221);
-    //background: rgb(237, 236, 233);
     background: #EAEAEA;
     text-align: center;
     position: relative;
-    border-left: groove #AD974F;
-    border-right: groove #AD974F;
+    box-shadow:0px 0px 0px 1px #8E793E inset;
     height: 800px;
     overflow: scroll;
 }
@@ -87,24 +73,27 @@ header {
 .grocery{
     text-align: center;
     border-radius: 0px 0px 25px 0px;
-    //height: auto;
     width: 25%;
-    //background: rgb(154, 152, 132);
-    //background: rgb(200, 197, 188);
     background: #EAEAEA;
     height: 800px;
     overflow: scroll;
+    box-shadow:0px 0px 0px 1px #8E793E inset;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1000px) {
     .results  {
         width: 100%;
+        border-radius: 0px 0px 25px 25px;
+
     }
     .recipe {
         width: 100%;
+        border-radius: 25px 25px 25px 25px;
+        border: none;
     }
     .grocery {
         width: 100%;
+        border-radius: 25px 25px 25px 25px;
     }
 }
 
@@ -121,7 +110,6 @@ header {
     border-radius: 10px;
     width: 100%;
     object-fit: contain;
-    //border: groove #AD974F;
 }
 
 .results_fig > img:hover{
@@ -134,7 +122,6 @@ header {
 .results_name {
     font-size: 25px;
     text-align: center;
-    //color: rgb(47, 70, 76);
     color: #231F20;
     text-decoration: underline;
     text-decoration-color:rgb(47, 70, 76);
@@ -143,7 +130,6 @@ header {
 .results_author {
     font-size: 15px;
     text-align: center;
-    //color: rgb(47, 70, 76);
     color: #231F20;
     text-decoration: underline;
     text-decoration-color:rgb(47, 70, 76);
@@ -174,10 +160,126 @@ footer {
     margin-top: 125px;
     background: #8E793E;
     width: 100%;
-    height: 200px;
+    height: 100px;
+    text-align: center;
 }
 
 #map {
-    width: 50%;
+    width: 100%;
     height: 50%;
+}
+
+#mapText {
+    text-align: center;
+    color: #AD974F;
+    font-family: Baskerville;
+    font-size: 18px;
+}
+
+.logoMap {
+    display: flex;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.recipe_figure > img{
+    border-radius: 10px;
+    width: 100%;
+    object-fit: contain;
+    margin-top: 30px;
+}
+
+.recipe__ingredient-list {
+    margin: 0px 50px 0px 50px;
+}
+
+.recipe__directions-text {
+    margin: 0px 50px 0px 50px;
+
+}
+
+#mapButton {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    font-size: 16px;
+    padding: 5px 15px 5px 15px;
+}
+
+#mapButton:hover {
+    box-shadow: 0 0 4px white;
+}
+
+#creatorsButton {
+    margin: 33px 25px 0px 25px;
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    font-size: 16px;
+    padding: 5px 15px 5px 15px;
+}
+
+#creatorsButton:hover {
+    box-shadow: 0 0 4px white;
+}
+
+#galleryButton {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    font-size: 16px;
+    padding: 5px 15px 4px 15px;
+}
+
+#galleryButton:hover {
+    box-shadow: 0 0 2px white;
+}
+
+#video {
+    align-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 50px;
+}
+
+.lightbox-link:hover {
+
+}
+
+* {
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#galleryImagesRow {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.galleryImage {
+    margin-top: 25px;
+    flex: 33.33%;
+}
+
+#galleryHeader {
+    color: #AD974F;
+    font-family: Baskerville;
+    letter-spacing: 5px;
+    text-decoration: underline #AD974F ;
+}
+
+#galleryText {
+    color: #AD974F;
+    font-family: Baskerville;
+}
+
+.logoGallery {
+    display: flex;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
 }
