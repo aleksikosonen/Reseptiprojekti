@@ -10,7 +10,7 @@ const shoppinList = document.querySelector('.shopping__description');
 const addToList = document.getElementById("addToList");
 const groceryList = document.querySelector(".groceryList");
 const deleteBtn = document.getElementById("deleteButton");
-
+const guideUse = document.querySelector('.guideForUseSmall');
 
 //2 Globaalia muuttujaa reseptien ainesosien pätkimistä varten
 let ingredientsData;
@@ -27,6 +27,31 @@ searchForm.addEventListener("submit", e =>{
 //myös jos URLässä on hash jo valmiiksi, ja sivu ladataan, ajetaan funktio "controlRecipe"
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
 
+
+
+var url = window.location.href;
+var lastPart = url.substr(url.lastIndexOf('/') + 1);
+
+    if (lastPart === "index.html") {
+        const markUserHelp = `
+
+         <h1>Hello User!</h1>
+        <p>Welcome to MealMate!</p>
+        <p>On this site you can find exciting new recipes to experiment in your everyday life</p>
+        <p>Start your MealMate journey by searching for a recipe in the search bar!</p>
+        <p>..psst!</p>
+        <p>You can always return to this view by pressing our super cool logo</p>`
+
+        guideUse.insertAdjacentHTML('afterbegin', markUserHelp);
+    }
+
+
+function clearUserHelp() {
+    if (lastPart === "index.html" && window.outerWidth<=1000) {
+        const markUserHelp = '';
+        searchResults.insertAdjacentHTML('afterbegin', markUserHelp);
+    }
+}
 
 function clearInput(){
     //hakunkentän nollaamiseen käytettävä funktio
@@ -54,6 +79,7 @@ async function searchControl() {
     const input = getInput();
     if(input){
         //valmistellaan UI
+        clearUserHelp();
         clearResults();
         clearInput();
 
@@ -190,6 +216,13 @@ function reseptiRender(id){
     });
 }
 
+function locateToGrocery() {
+    document.querySelector('.grocery').scrollIntoView({
+        behavior: 'smooth'
+    });
+}
+
+
 
 //funktio valmistusaineiden yhdistämiseksi
  function unifyIngredients(){
@@ -282,7 +315,7 @@ function addToCart(){
         //console.log(shopItems);
         renderItem(shopItems);
     });
-    
+    locateToGrocery();
     console.log(shopListItems[1]);
     };
 
