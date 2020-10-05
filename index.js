@@ -256,7 +256,6 @@ function reseptiRender(id){
         
 };
 
-
 const createIngredient = ingredient => `
 <li class="recipe__item">
     <div class="recipe__count">${ingredient.count}</div>
