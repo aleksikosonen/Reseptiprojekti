@@ -297,7 +297,8 @@ function ostosLista (count, unit, ingredient) {
 
 function deleteItem(id){
     console.log(id);
-    const item = shopListItems.findIndex(e => e.id === id);
+    //const item = shopListItems.findIndex(e => e.id === id);
+    const item = shoppinList.findIndex()
     shopListItems.splice(item);
 };
 
@@ -309,7 +310,7 @@ const renderItem = item => {
                 <p>${item.unit}</p>
             </div>
             <p class="shopping__description">${item.ingredient}</p>
-            <button id="deleteBtn" onclick="deleteItem(${item.id})">Delete Item</button>
+            <button id="deleteBtn" onclick="deleteItem(${(item.id)})">Delete Item</button>
         </li>   
     `;
     groceryList.insertAdjacentHTML('beforeend', markup);
