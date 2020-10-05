@@ -196,10 +196,7 @@ function reseptiRender(id){
             </p>
         
             <a class="btn-small recipe__btn" href="${jsonData.recipe.source_url}" target="_blank">
-                <span>Directions</span>
-                <svg class="search__icon">
-                </svg>
- 
+                <span class="directions">Directions</span> 
             </a>
         </div>
             `;
@@ -291,8 +288,9 @@ function locateToGrocery() {
 const createIngredient = ingredient => `
 <li class="recipe__item">
     <div class="recipe__count">${ingredient.count}</div>
+    <div class="recipe__unit">${ingredient.unit}</div>
     <div class="recipe__ingredient">
-        <span class="recipe__unit">${ingredient.unit}</span>
+        <!--<span class="recipe__unit">${ingredient.unit}</span>-->
         ${ingredient.ingredient}
     </div>
 </li>

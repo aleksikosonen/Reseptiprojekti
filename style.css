@@ -207,7 +207,51 @@ footer {
 
 .recipe__directions-text {
     margin: 0px 50px 0px 50px;
+}
 
+.heading-2 {
+    margin: 0px 50px 25px 50px;
+}
+
+.recipe__item {
+    display: flex;
+    flex-wrap: wrap;
+    place-items: center;
+    justify-content: center;
+}
+
+.recipe__count {
+
+}
+
+.recipe__unit {
+    margin: 0px 3px 0px 3px;
+}
+
+.recipe__ingredient {
+
+}
+
+/*.recipe__count {
+    float: left;
+}
+
+.recipe__unit {
+    float: left;
+    margin-left: 5px;
+}
+
+.recipe__ingredient {
+    text-align: right;
+}*/
+
+#addToList {
+    margin: 50px 50px 25px 50px;
+}
+
+.directions {
+    display: inline-block;
+    margin: 50px 50px 50px 50px;
 }
 
 #mapButton {
