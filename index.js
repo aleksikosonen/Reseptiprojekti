@@ -270,22 +270,20 @@ function guidGenerator() {
     };
     return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 }
+let shopItems = [];
+let shopListItems = [];
 
 function addToCart(){
     unifiedIngredients.forEach(e =>{
         shopItems = ostosLista(e.count, e.unit, e.ingredient);
-        console.log(shopItems);
+        shopListItems.push(shopItems);
+        //console.log(shopItems);
         renderItem(shopItems);
-    })
-};
+        
+    });
+    console.log(shopListItems[1]);
+    };
 
-let shopItems = [];
-let shopListItems = [];
-
-
-function random(){
-    Math.floor(Math.random()*100)+1 
-}
 
 function ostosLista (count, unit, ingredient) {
  item = {
@@ -294,15 +292,13 @@ function ostosLista (count, unit, ingredient) {
      unit,
      ingredient
  }
-    shopListItems.push(item);
     return item;
 };
 
-
-
-function deleteItem(id) {
-    const item = shopItems.findIndex(el => e.id === id);
-    this.item.splice;
+function deleteItem(id){
+    console.log(id);
+    const item = shopListItems.findIndex(e => e.id === id);
+    shopListItems.splice(item);
 };
 
 const renderItem = item => {
@@ -313,7 +309,7 @@ const renderItem = item => {
                 <p>${item.unit}</p>
             </div>
             <p class="shopping__description">${item.ingredient}</p>
-            <button id="deleteBtn" href="#" onclick="deleteItem(${item.id})">Delete Item</button>
+            <button id="deleteBtn" onclick="deleteItem(${item.id})">Delete Item</button>
         </li>   
     `;
     groceryList.insertAdjacentHTML('beforeend', markup);
