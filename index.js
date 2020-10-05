@@ -86,7 +86,6 @@ function reseptiHaku(query){
     fetch(url)
     .then(response =>response.json())
     .then((jsonData) => {
-        console.log(jsonData);
         jsonData.recipes;
         jsonData.recipes.forEach(function(e){
             const mark = `
@@ -162,7 +161,7 @@ function reseptiRender(id){
                 ${unifiedIngredients.map(el => createIngredient(el)).join('')}
             </ul>
             <div>
-            <button id="addToList">Add ingredients to shopping list</button>
+            <button id="addToList" href="#" onclick="addToCart()">Add ingredients to shopping list</button>
             </div>
         </div>
  
@@ -203,7 +202,7 @@ function reseptiRender(id){
     const longUnits = ["tablespoons", "tablespoon", "ounces", "ounce", "teaspoons", "teaspoon", "cups", "pounds"];
     const shortUnits = ["tbsp", "tbsp", "oz", "oz", "tsp", "tsp", "cup", "pound"];
     
-        console.log(ingredientsData);
+        
         //funktio millä muutetaan valmistusaineet array muotoon, eritellään määrät, mittayksiköt sekä ainesosat
         const ingredientsNew = ingredientsData.map(e => {
             
@@ -260,9 +259,6 @@ function reseptiRender(id){
 
 const createIngredient = ingredient => `
 <li class="recipe__item">
-    <svg class="recipe__icon">
-        <use href="img/icons.svg#icon-check"></use>
-    </svg>
     <div class="recipe__count">${ingredient.count}</div>
     <div class="recipe__ingredient">
         <span class="recipe__unit">${ingredient.unit}</span>
@@ -291,14 +287,18 @@ function addIngridients() {
 }
  
 
-/**  nikon sunnuntai säädöt, katotaan maanantaina
- * let shopListItems = [];
+function addToCart(){
+    ostosLista(unifiedIngredients.count, unifiedIngredients.unit, unifiedIngredients.ingredient);
+    console.log(shopListItems);
+};
 
-item = {
-    id: random(),
-    count,
-    unit,
-    ingredient
+
+
+  let shopListItems = [];
+
+
+function random(){
+    Math.floor(Math.random()*100)+1 
 }
 
 function ostosLista(count, unit, ingredient) {
@@ -312,12 +312,12 @@ function ostosLista(count, unit, ingredient) {
     return item;
 };
 
-deleteItem(id){
+function deleteItem(id){
     const index = shopListItems.findIndex(el => el.id === id);
     shopListItems.splice(index, 1);
 }
 
-export const renderItem = item => {
+const renderItem = item => {
     const markup = `
         <li class="shopping__item" data-itemid=${item.id}>
             <div class="shopping__count">
@@ -334,5 +334,3 @@ export const renderItem = item => {
     `;
     elements.shopping.insertAdjacentHTML('beforeend', markup);
 };
- * 
- */
