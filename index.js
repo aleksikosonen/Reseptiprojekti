@@ -9,6 +9,8 @@ const logoButton = document.querySelector(".logo");
 const shoppinList = document.querySelector('.shopping__description');
 const addToList = document.getElementById("addToList");
 const groceryList = document.querySelector(".groceryList");
+const deleteBtn = document.getElementById("deleteButton");
+
 
 //2 Globaalia muuttujaa reseptien ainesosien pätkimistä varten
 let ingredientsData;
@@ -279,8 +281,8 @@ function addToCart(){
         shopListItems.push(shopItems);
         //console.log(shopItems);
         renderItem(shopItems);
-        
     });
+    
     console.log(shopListItems[1]);
     };
 
@@ -296,11 +298,15 @@ function ostosLista (count, unit, ingredient) {
 };
 
 function deleteItem(id){
-    console.log(id);
-    //const item = shopListItems.findIndex(e => e.id === id);
-    const item = shoppinList.findIndex()
-    shopListItems.splice(item);
+    const item = shopListItems.findIndex(e => e.id === id);
+    shopListItems.splice(item, 1);
+    const rItem = document.querySelector(`[data-itemid="${id}"]`);
+    if (rItem) rItem.parentElement.removeChild(rItem);
+
 };
+
+
+
 
 const renderItem = item => {
     const markup = `
@@ -310,8 +316,24 @@ const renderItem = item => {
                 <p>${item.unit}</p>
             </div>
             <p class="shopping__description">${item.ingredient}</p>
-            <button id="deleteBtn" onclick="deleteItem(${(item.id)})">Delete Item</button>
+            <button class="deleteButton">Delete Item</button>
         </li>   
     `;
     groceryList.insertAdjacentHTML('beforeend', markup);
 };
+
+
+groceryList.addEventListener('click', e => {
+    const id = e.target.closest('.shopping_item').dataset.itemid;
+
+    // Handle the delete button
+    if (e.target.matches('.deleteButton, .deleteButton *')) {
+        // Delete from state
+        deleteItem(id);
+
+    // Handle the count update
+    } else if (e.target.matches('.shopping__count-value')) {
+        const val = parseFloat(e.target.value, 10);
+        state.list.updateCount(id, val);
+    }
+});
