@@ -251,11 +251,8 @@ function reseptiRender(id){
         
 };
 
-<<<<<<< HEAD
-=======
-
 //funktio millä kirjoitetaan HTMLään reseptin ainesosat
->>>>>>> 7a4a67d8981345e5c4f96a700bc53be270ef68d0
+
 const createIngredient = ingredient => `
 <li class="recipe__item">
     <div class="recipe__count">${ingredient.count}</div>
@@ -305,7 +302,7 @@ function ostosLista (count, unit, ingredient) {
 
 function deleteItem(id) {
     const item = shopItems.findIndex(el => e.id === id);
-    this.item.splice
+    this.item.splice;
 };
 
 const renderItem = item => {
