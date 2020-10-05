@@ -232,6 +232,29 @@ footer {
 
 }
 
+.shopping_item {
+    border-style: groove;
+    margin-top: 0 !important;
+    display: flex;
+    justify-content: space-around;
+}
+
+.shopping__count-value {
+    margin-top: 25px;
+}
+
+.groceryUnit {
+    margin-top: 0 !important;
+}
+
+.shopping__description {
+    margin-top: 0 !important;
+}
+
+.deleteButton {
+    margin-bottom: 25px;
+
+}
 /*.recipe__count {
     float: left;
 }

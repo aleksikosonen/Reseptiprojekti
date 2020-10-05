@@ -344,7 +344,7 @@ const renderItem = item => {
         <li class="shopping_item" data-itemid=${item.id}>
             <div class="shopping_count">
                 <input type="number" value="${item.count}" step="${item.count}" class="shopping__count-value">
-                <p>${item.unit}</p>
+                <p class="groceryUnit">${item.unit}</p>
             </div>
             <p class="shopping__description">${item.ingredient}</p>
             <button class="deleteButton">Delete Item</button>
