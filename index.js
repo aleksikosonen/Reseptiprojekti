@@ -8,7 +8,7 @@ const recipe = document.querySelector(".recipe");
 const logoButton = document.querySelector(".logo");
 const shoppinList = document.querySelector('.shopping__description');
 const addToList = document.getElementById("addToList");
-
+const groceryList = document.querySelector(".groceryList");
 
 //2 Globaalia muuttujaa reseptien ainesosien pätkimistä varten
 let ingredientsData;
@@ -142,13 +142,8 @@ function reseptiRender(id){
     .then(response =>response.json())
     .then((jsonData) => {
         //kirjoitetaan HTMLään resepti
-        ingredientArray = [];
-        arvo = Object.keys(jsonData.recipe.ingredients).length;
         ingredientsData = jsonData.recipe.ingredients;
         unifiedIngredients = unifyIngredients();
-        for (let i=0; i<arvo; i++) {
-            ingredientArray[i] = jsonData.recipe.ingredients[i];
-        }
         const mark = `
         <figure class="recipe_figure">
             <img src="${jsonData.recipe.image_url}" alt="${jsonData.recipe.title}" class="recipe__img">
@@ -225,9 +220,9 @@ function reseptiRender(id){
                 let count;
 
                 if (arrCount.length === 1) {
-                    count = eval(arrIng[0].replace('-', '+'));
+                    count = eval(arrIng[0].replace('-', '+')).toFixed(2);
                 } else {
-                    count = eval(arrIng.slice(0, unitIndex).join('+'));
+                    count = eval(arrIng.slice(0, unitIndex).join('+')).toFixed(2);
                 }
 
                 ingredientObject = {
@@ -257,6 +252,7 @@ function reseptiRender(id){
 };
 
 
+//funktio millä kirjoitetaan HTMLään reseptin ainesosat
 const createIngredient = ingredient => `
 <li class="recipe__item">
     <div class="recipe__count">${ingredient.count}</div>
@@ -267,43 +263,33 @@ const createIngredient = ingredient => `
 </li>
 `;
 
-/*const mapButton2 = document.querySelector('.mapButton2');
-mapButton2.addEventListener('onclick', openInPage);
-
-function openInPage() {
-    window.alert(kartta.html);
-}*/
-
-//Funktio ingridientsin käsittelyyn, jatketaan tästä maanantaina
-
-const groButton = document.querySelector('.shopping__delete');
-groButton.addEventListener('click', addIngridients);
-
-function addIngridients() {
-    shoppinList.innerHTML='';
-    for (let i=0; i<ingredientArray.length;i++) {
-        shoppinList.innerHTML += '<li>' + ingredientArray[i] + '</li>';
-    }
-}
  
+function guidGenerator() {
+    var S4 = function() {
+       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    };
+    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+}
 
 function addToCart(){
-    ostosLista(unifiedIngredients.count, unifiedIngredients.unit, unifiedIngredients.ingredient);
-    console.log(shopListItems);
+    unifiedIngredients.forEach(e =>{
+        shopItems = ostosLista(e.count, e.unit, e.ingredient);
+        console.log(shopItems);
+        renderItem(shopItems);
+    })
 };
 
-
-
-  let shopListItems = [];
+let shopItems = [];
+let shopListItems = [];
 
 
 function random(){
     Math.floor(Math.random()*100)+1 
 }
 
-function ostosLista(count, unit, ingredient) {
+function ostosLista (count, unit, ingredient) {
  item = {
-     id: random(),
+     id: guidGenerator(),
      count,
      unit,
      ingredient
@@ -312,25 +298,23 @@ function ostosLista(count, unit, ingredient) {
     return item;
 };
 
-function deleteItem(id){
-    const index = shopListItems.findIndex(el => el.id === id);
-    shopListItems.splice(index, 1);
-}
+
+
+function deleteItem(id) {
+    const item = shopItems.findIndex(el => e.id === id);
+    this.item.splice
+};
 
 const renderItem = item => {
     const markup = `
-        <li class="shopping__item" data-itemid=${item.id}>
-            <div class="shopping__count">
+        <li class="shopping_item" data-itemid=${item.id}>
+            <div class="shopping_count">
                 <input type="number" value="${item.count}" step="${item.count}" class="shopping__count-value">
                 <p>${item.unit}</p>
             </div>
             <p class="shopping__description">${item.ingredient}</p>
-            <button class="shopping__delete btn-tiny">
-                <svg>
-                    <use href="img/icons.svg#icon-circle-with-cross"></use>
-                </svg>
-            </button>
-        </li>
+            <button id="deleteBtn" href="#" onclick="deleteItem(${item.id})">Delete Item</button>
+        </li>   
     `;
-    elements.shopping.insertAdjacentHTML('beforeend', markup);
+    groceryList.insertAdjacentHTML('beforeend', markup);
 };
