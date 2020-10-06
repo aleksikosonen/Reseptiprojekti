@@ -356,14 +356,25 @@ footer {
     font-family: Baskerville;
 }
 
-.validateText {
+.validateUser {
+    color: #AD974F;
+    font-family: Baskerville;
+    display: block;
+    margin-top: 200px;
+}
+
+.validatePassword {
     color: #AD974F;
     font-family: Baskerville;
 }
 
 #validateForm {
-    align-content: center;
+    //align-content: center;
     margin-top: 200px;
+}
+
+.passwordInput {
+
 }
 
 .logoGallery {
