@@ -4,6 +4,18 @@ body {
     padding: 0 !important;
 }
 
+h1 {
+    font-family: Georgia;
+}
+
+h2 {
+    font-family: Georgia;
+}
+
+p {
+    font-family: Baskerville;
+}
+
 header {
     margin: auto;
     text-align: center;
@@ -239,7 +251,8 @@ footer {
 }
 
 .shopping_item {
-    border-bottom-style: groove;
+    border-bottom: 2px #AD974F solid ;
+    //border-bottom-style: groove;
     //border-style: groove;
     //margin-top: 0 !important;
     margin: 25px;
