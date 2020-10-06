@@ -359,18 +359,22 @@ footer {
 .validateUser {
     color: #AD974F;
     font-family: Baskerville;
-    display: block;
-    margin-top: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .validatePassword {
     color: #AD974F;
     font-family: Baskerville;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #validateForm {
-    //align-content: center;
     margin-top: 200px;
+
 }
 
 .passwordInput {
