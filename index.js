@@ -11,6 +11,7 @@ const addToList = document.getElementById("addToList");
 const groceryList = document.querySelector(".groceryList");
 const deleteBtn = document.getElementById("deleteButton");
 const guideUse = document.querySelector('.guideForUseSmall');
+const groceryGuide = document.querySelector('.myGroceryList');
 
 //2 Globaalia muuttujaa reseptien ainesosien pätkimistä varten
 let ingredientsData;
@@ -315,6 +316,13 @@ function addToCart(){
     });
     locateToGrocery();
     console.log(shopListItems[1]);
+    if (groceryGuide.innerHTML.length < 1) {
+        const groceryGuideText = `
+            <p>Here you have your grocerylist!</p>
+            <p>Feel free to delete the items you don't need to purchase</p>
+            `;
+        groceryGuide.insertAdjacentHTML('afterbegin', groceryGuideText);
+    }
     };
 
 
