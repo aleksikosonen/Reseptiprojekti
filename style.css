@@ -352,6 +352,16 @@ footer {
     font-family: Baskerville;
 }
 
+.validateText {
+    color: #AD974F;
+    font-family: Baskerville;
+}
+
+#validateForm {
+    align-content: center;
+    margin-top: 200px;
+}
+
 .logoGallery {
     display: flex;
     align-content: center;
