@@ -235,8 +235,6 @@ footer {
 .shopping_item {
     border-style: groove;
     margin-top: 0 !important;
-    display: flex;
-    justify-content: space-around;
 }
 
 .shopping__count-value {
@@ -244,11 +242,11 @@ footer {
 }
 
 .groceryUnit {
-    margin-top: 0 !important;
+    margin-top: 25px;
 }
 
 .shopping__description {
-    margin-top: 0 !important;
+    margin-top: 25px;
 }
 
 .deleteButton {
