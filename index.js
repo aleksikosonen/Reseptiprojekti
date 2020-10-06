@@ -355,7 +355,9 @@ const renderItem = item => {
                 <p class="groceryUnit">${item.unit}</p>
             </div>
             <p class="shopping__description">${item.ingredient}</p>
-            <button class="deleteButton">Delete Item</button>
+            <button class="deleteButton">
+                <img src="deleteikoni.png" width="15px" height="15px"/>
+            </button>
         </li>   
     `;
     groceryList.insertAdjacentHTML('beforeend', markup);
