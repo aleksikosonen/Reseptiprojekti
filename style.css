@@ -1,5 +1,5 @@
 body {
-    background: rgb(25, 25, 25);
+    background: rgb(15, 15, 15);
     margin: 0 !important;
     padding: 0 !important;
 }
@@ -61,7 +61,7 @@ header {
 .results{
     border-radius: 0px 0px 0px 25px;
     width: 25%;
-    background: #EAEAEA;
+    background: white;
     text-align: center;
     height: 800px;
     overflow: scroll;
@@ -74,11 +74,27 @@ header {
 
 .recipeGuide {
     margin: 25px;
+    //background: #EAEAEA;
+    //background: #AD974F;
+    padding: 5px;
+    border: #AD974F;
+    border-style: groove;
+    border-radius:10px;
+
 }
+
+.guideForUseSmall {
+    margin: 25px;
+    padding: 5px;
+    border: #AD974F;
+    border-style: groove;
+    border-radius:10px;
+}
+
 
 .recipe{
     width: 50%;
-    background: #EAEAEA;
+    background: white;
     text-align: center;
     position: relative;
     box-shadow:0px 0px 0px 1px #8E793E inset;
@@ -90,7 +106,7 @@ header {
     text-align: center;
     border-radius: 0px 0px 25px 0px;
     width: 25%;
-    background: #EAEAEA;
+    background: white;
     height: 800px;
     overflow: scroll;
     box-shadow:0px 0px 0px 1px #8E793E inset;
@@ -217,6 +233,9 @@ footer {
     width: 100%;
     object-fit: contain;
     margin-top: 30px;
+    //border: #AD974F;
+    //border-style: groove;
+    //box-shadow: #AD974F 0 0 5px 1px;
 }
 
 .recipe__ingredient-list {
@@ -333,6 +352,7 @@ footer {
     align-content: center;
     display: flex;
     flex-wrap: wrap;
+    margin-top: 50px;
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 50px;
@@ -355,6 +375,7 @@ footer {
 .galleryImage {
     margin-top: 25px;
     flex: 33.33%;
+    margin-bottom: 25px;
 }
 
 #galleryHeader {
@@ -367,6 +388,7 @@ footer {
 .galleryText {
     color: #AD974F;
     font-family: Baskerville;
+    margin-top: 25px;
 }
 
 .validateUser {

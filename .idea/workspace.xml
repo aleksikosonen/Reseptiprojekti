@@ -3,7 +3,38 @@
   <component name="ChangeListManager">
     <list default="true" id="86990f9f-b8ca-46a9-9008-928511991329" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GoldLogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/creators.html" beforeDir="false" afterPath="$PROJECT_DIR$/creators.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deleteikoni.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dumplings.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/farang.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gallery.html" beforeDir="false" afterPath="$PROJECT_DIR$/gallery.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haku_ikoni.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hakuikoni.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/headerImage.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kartta.html" beforeDir="false" afterPath="$PROJECT_DIR$/kartta.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logo_placeholder.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logogold2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logogoldtest.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/magn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/magn2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/magnifying.svg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mealmatelogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mealmatelogo2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/muokkaus.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/muokkaus2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pizza.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pizza2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reseptikuva_placeholder.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/risotto.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spagetti.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taco.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/validate.html" beforeDir="false" afterPath="$PROJECT_DIR$/validate.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +103,8 @@
       <workItem from="1601878794970" duration="1299000" />
       <workItem from="1601880628179" duration="14892000" />
       <workItem from="1601904233085" duration="1454000" />
-      <workItem from="1601966068114" duration="10218000" />
+      <workItem from="1601966068114" duration="11611000" />
+      <workItem from="1601982848084" duration="1405000" />
     </task>
     <servers />
   </component>

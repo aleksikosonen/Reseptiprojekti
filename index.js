@@ -356,7 +356,7 @@ const renderItem = item => {
             </div>
             <p class="shopping__description">${item.ingredient}</p>
             <button class="deleteButton">
-                <img src="deleteikoni.png" width="15px" height="15px"/>
+                <img src="ikonit/deleteikoni.png" width="15px" height="15px"/>
             </button>
         </li>   
     `;
