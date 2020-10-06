@@ -30,14 +30,12 @@ header {
     position:relative;
     box-shadow:0px 0px 10px 1px black;
     transition: 1s;
-
 }
 
 .random_food_trivia {
     display: none;
     background: rgb(198, 197, 185);
     margin: 0px 0px 0px 0px !important;
-
 }
 
 .search {
@@ -74,13 +72,10 @@ header {
 
 .recipeGuide {
     margin: 25px;
-    //background: #EAEAEA;
-    //background: #AD974F;
     padding: 5px;
     border: #AD974F;
     border-style: groove;
     border-radius:10px;
-
 }
 
 .guideForUseSmall {
@@ -120,7 +115,6 @@ header {
     .results  {
         width: 100%;
         border-radius: 0px 0px 25px 25px;
-
     }
     .recipe {
         width: 100%;
@@ -146,7 +140,6 @@ header {
 
 .results_fig {
     margin: 40px 25px 0px 25px;
-
 }
 
 .results_fig > img{
@@ -186,9 +179,6 @@ li {
 
 ul {
     padding-inline-start: 0px;
-}
-
-.search_icon {
 }
 
 .shopping__delete {
@@ -233,9 +223,6 @@ footer {
     width: 100%;
     object-fit: contain;
     margin-top: 30px;
-    //border: #AD974F;
-    //border-style: groove;
-    //box-shadow: #AD974F 0 0 5px 1px;
 }
 
 .recipe__ingredient-list {
@@ -255,55 +242,24 @@ footer {
     flex-wrap: wrap;
     place-items: center;
     justify-content: center;
-}
-
-.recipe__count {
-
+    margin-bottom: 3px;
 }
 
 .recipe__unit {
     margin: 0px 3px 0px 3px;
 }
 
-.recipe__ingredient {
-
-}
-
 .shopping_item {
     border-bottom: 2px #AD974F solid ;
-    //border-bottom-style: groove;
-    //border-style: groove;
-    //margin-top: 0 !important;
     margin: 25px;
-}
-
-.shopping__count-value {
-}
-
-.groceryUnit {
-}
-
-.shopping__description {
 }
 
 .deleteButton {
     margin-bottom: 25px;
 }
-/*.recipe__count {
-    float: left;
-}
-
-.recipe__unit {
-    float: left;
-    margin-left: 5px;
-}
-
-.recipe__ingredient {
-    text-align: right;
-}*/
 
 #addToList {
-    margin: 50px 50px 25px 50px;
+    margin: 25px 50px 25px 50px;
 }
 
 .directions {
@@ -358,10 +314,6 @@ footer {
     margin-bottom: 50px;
 }
 
-.lightbox-link:hover {
-
-}
-
 * {
     box-sizing: border-box;
     text-align: center;
@@ -391,6 +343,32 @@ footer {
     margin-top: 25px;
 }
 
+#creatorsImagesRow {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.creatorsImage {
+    margin-top: 25px;
+    flex: 33.33%;
+    margin-bottom: 25px;
+}
+
+#creatorsHeader {
+    color: #AD974F;
+    font-family: Baskerville;
+    letter-spacing: 5px;
+    text-decoration: underline #AD974F ;
+}
+
+.creatorsText {
+    color: #AD974F;
+    font-family: Baskerville;
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
+
 .validateUser {
     color: #AD974F;
     font-family: Baskerville;
@@ -409,11 +387,6 @@ footer {
 
 #validateForm {
     margin-top: 200px;
-
-}
-
-.passwordInput {
-
 }
 
 .logoGallery {
