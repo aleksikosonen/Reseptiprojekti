@@ -57,7 +57,11 @@ header {
 }
 
 .resultGuide {
-    margin: 25px 25px 0px 25px;
+    margin: 50px 25px 0px 25px;
+}
+
+.recipeGuide {
+    margin: 25px;
 }
 
 .recipe{
@@ -136,6 +140,7 @@ header {
     color: #231F20;
     text-decoration: underline;
     text-decoration-color:rgb(47, 70, 76);
+    margin: 25px;
 }
 
 .results_author {
@@ -144,6 +149,7 @@ header {
     color: #231F20;
     text-decoration: underline;
     text-decoration-color:rgb(47, 70, 76);
+    margin: 25px;
 }
 
 li {
@@ -233,25 +239,23 @@ footer {
 }
 
 .shopping_item {
-    border-style: groove;
-    margin-top: 0 !important;
+    border-bottom-style: groove;
+    //border-style: groove;
+    //margin-top: 0 !important;
+    margin: 25px;
 }
 
 .shopping__count-value {
-    margin-top: 25px;
 }
 
 .groceryUnit {
-    margin-top: 25px;
 }
 
 .shopping__description {
-    margin-top: 25px;
 }
 
 .deleteButton {
     margin-bottom: 25px;
-
 }
 /*.recipe__count {
     float: left;
@@ -373,4 +377,8 @@ footer {
 .guideForUseSmall {
     margin-left: 25px;
     margin-right: 25px;
+}
+
+.myGroceryList {
+    margin: 25px;
 }
