@@ -5,12 +5,12 @@ const searchResults = document.querySelector(".resultGuide");
 const resList = document.querySelector(".search_results_list");
 const mapButton = document.getElementById("map"); // tällä saaa map buttonin toimimaan, kato lightbox täältä http://users.metropolia.fi/~janneval/media/viikko3.html
 const recipe = document.querySelector(".recipe");
-const logoButton = document.querySelector(".logo");
-const shoppinList = document.querySelector('.shopping__description');
+//const logoButton = document.querySelector(".logo");
+//const shoppinList = document.querySelector('.shopping__description');
 const addToList = document.getElementById("addToList");
 const groceryList = document.querySelector(".groceryList");
-const deleteBtn = document.getElementById("deleteButton");
-const guideUse = document.querySelector('.guideForUseSmall');
+//const deleteBtn = document.getElementById("deleteButton");
+//const guideUse = document.querySelector('.guideForUseSmall');
 const groceryGuide = document.querySelector('.myGroceryList');
 
 //2 Globaalia muuttujaa reseptien ainesosien pätkimistä varten
@@ -30,34 +30,18 @@ searchForm.addEventListener("submit", e =>{
 //kun URLässä oleva hash muuttuu, ajetaan funktio "controlRecipe"
 //window.onhashchange = controlRecipe;
 //myös jos URLässä on hash jo valmiiksi, ja sivu ladataan, ajetaan funktio "controlRecipe"
+
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
 
-
+function guidGenerator() {
+    var S4 = function() {
+        return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    };
+    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+}
 
 const url = window.location.href;
 const lastPart = url.substr(url.lastIndexOf('/') + 1);
-
-if (lastPart === "index.html") {
-    const markUserHelp = `
-
-        <h1>Hello User!</h1>
-    <p>Welcome to MealMate!</p>
-    <p>On this site you can find exciting new recipes to experiment in your everyday life</p>
-    <p>Start your MealMate journey by searching for a recipe in the search bar!</p>
-    <p>..psst!</p>
-    <p>You can always return to this view by pressing our super cool logo</p>`
-
-    guideUse.insertAdjacentHTML('afterbegin', markUserHelp);
-}
-
-
-function clearUserHelp() {
-    if (lastPart === "index.html" && window.outerWidth<=1000) {
-        const markUserHelp = '';
-        searchResults.insertAdjacentHTML('afterbegin', markUserHelp);
-    }
-}
-
 
 function clearSearchInput(){
     //hakunkentän nollaamiseen käytettävä funktio
@@ -88,7 +72,6 @@ async function searchControl() {
     //jos input on olemassa, tehdään api haku ja renderöidään tulokset
     if(input){
         //valmistellaan UI hakutuloksia varten
-        clearUserHelp();
         clearSearchResults();
         clearSearchInput();
 
@@ -200,9 +183,8 @@ function reseptiRender(id){
             <h2 class="heading-2">How to cook it</h2>
             <p class="recipe__directions-text">
                 This recipe was designed by 
-                <span class="recipe__by">"${jsonData.recipe.publisher}"</span>. Please visit their webside for more indepth directions from the link below.
-        
-            <a class="btn-small recipe__btn" href="${jsonData.recipe.source_url}" target="_blank">
+                <span class="recipe__by">"${jsonData.recipe.publisher}"</span>. Please visit their webside for more indepth directions from the link below.</p>
+                <a class="btn-small recipe__btn" href="${jsonData.recipe.source_url}" target="_blank">
                 <span class="directions">Directions</span> 
             </a>
         </div>
@@ -213,13 +195,14 @@ function reseptiRender(id){
 };
 
 
-//Navigoidaan sivu oikeaan näkymään
+//Navigoidaan sivu keskimmäiseen reseptinäkymään
  function locate() {
     document.querySelector('.recipe').scrollIntoView({
         behavior: 'smooth'
     });
 }
 
+// Navigoidaan sivu ostoslistanäkymään
 function locateToGrocery() {
     document.querySelector('.grocery').scrollIntoView({
         behavior: 'smooth'
@@ -304,7 +287,7 @@ const createIngredient = ingredient => `
 `;
 
  
-
+// Funktio jolla viedään valittu resepti ostoskoriin
 function addToCart(){
     unifiedIngredients.forEach(e =>{
         shopItems = ostosLista(e.count, e.unit, e.ingredient);
@@ -353,8 +336,10 @@ const renderItem = item => {
                 <p class="groceryUnit">${item.unit}</p>
             </div>
             <p class="shopping__description">${item.ingredient}</p>
-            <button class="deleteButton">Delete Item</button>
-        </li>   
+            <button class="deleteButton">
+                <img src="Ikonit/deleteikoni.png" width="15px" height="15px"/>
+            </button>        
+            </li>   
     `;
     groceryList.insertAdjacentHTML('beforeend', markup);
 };
