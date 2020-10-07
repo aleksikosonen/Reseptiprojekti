@@ -256,10 +256,18 @@ footer {
 
 .deleteButton {
     margin-bottom: 25px;
+    cursor: pointer;
 }
 
 #addToList {
     margin: 25px 50px 25px 50px;
+    border-radius: 4px;
+    background-color: #AD974F;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .directions {
@@ -273,6 +281,7 @@ footer {
     border: 1px solid white;
     font-size: 16px;
     padding: 5px 15px 5px 15px;
+    cursor: pointer;
 }
 
 #mapButton:hover {
@@ -286,6 +295,7 @@ footer {
     border: 1px solid white;
     font-size: 16px;
     padding: 5px 15px 5px 15px;
+    cursor: pointer;
 }
 
 #creatorsButton:hover {
@@ -298,6 +308,7 @@ footer {
     border: 1px solid white;
     font-size: 16px;
     padding: 5px 15px 4px 15px;
+    cursor: pointer;
 }
 
 #galleryButton:hover {
@@ -325,7 +336,6 @@ footer {
 }
 
 .galleryImage {
-
     margin-top: 25px;
     flex: 33.33%;
     margin-bottom: 25px;
@@ -410,4 +420,16 @@ footer {
 
 .myGroceryList {
     margin: 25px;
+}
+
+.shopping__count-value {
+    cursor: pointer;
+}
+
+.search_icon {
+    cursor: pointer;
+}
+
+.logoMap {
+    cursor: pointer;
 }
