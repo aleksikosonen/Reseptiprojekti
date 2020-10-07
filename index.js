@@ -17,6 +17,10 @@ const groceryGuide = document.querySelector('.myGroceryList');
 let ingredientsData;
 let unifiedIngredients;
 
+//2 globaalia muuttujaa ostoslista ominaisuutta varten
+let shopItems;
+let shopListItems = [];
+
 //event listeneri hakukentälle
 searchForm.addEventListener("submit", e =>{
     e.preventDefault();
@@ -30,21 +34,21 @@ searchForm.addEventListener("submit", e =>{
 
 
 
-var url = window.location.href;
-var lastPart = url.substr(url.lastIndexOf('/') + 1);
+const url = window.location.href;
+const lastPart = url.substr(url.lastIndexOf('/') + 1);
 
-    if (lastPart === "index.html") {
-        const markUserHelp = `
+if (lastPart === "index.html") {
+    const markUserHelp = `
 
-         <h1>Hello User!</h1>
-        <p>Welcome to MealMate!</p>
-        <p>On this site you can find exciting new recipes to experiment in your everyday life</p>
-        <p>Start your MealMate journey by searching for a recipe in the search bar!</p>
-        <p>..psst!</p>
-        <p>You can always return to this view by pressing our super cool logo</p>`
+        <h1>Hello User!</h1>
+    <p>Welcome to MealMate!</p>
+    <p>On this site you can find exciting new recipes to experiment in your everyday life</p>
+    <p>Start your MealMate journey by searching for a recipe in the search bar!</p>
+    <p>..psst!</p>
+    <p>You can always return to this view by pressing our super cool logo</p>`
 
-        guideUse.insertAdjacentHTML('afterbegin', markUserHelp);
-    }
+    guideUse.insertAdjacentHTML('afterbegin', markUserHelp);
+}
 
 
 function clearUserHelp() {
@@ -54,16 +58,19 @@ function clearUserHelp() {
     }
 }
 
-function clearInput(){
+
+function clearSearchInput(){
     //hakunkentän nollaamiseen käytettävä funktio
     searchInput.value = "";
 };
 
-//haetaan hakukentälle arvo
-const getInput = () => searchInput.value;
 
-//kumitetaan vanhat tulokset pois
-function clearResults() {
+//funktio millä haetaan hakukentälle arvo
+const getSearchInput = () => searchInput.value;
+
+
+//funktio millä kumitetaan vanhat hakutulokset pois
+function clearSearchResults() {
     resList.innerHTML = "";
 };
 
@@ -77,19 +84,18 @@ function clearRecipe() {
 //Hakukoneiston ajamiseen tarkoitettu ohjelma
 async function searchControl() {
     //haetaan näkymästä input
-    const input = getInput();
+    const input = getSearchInput();
+    //jos input on olemassa, tehdään api haku ja renderöidään tulokset
     if(input){
-        //valmistellaan UI
+        //valmistellaan UI hakutuloksia varten
         clearUserHelp();
-        clearResults();
-        clearInput();
+        clearSearchResults();
+        clearSearchInput();
 
         //haetaan reseptit
         try{
             guideText();
             reseptiHaku(input);
-            //renderRecipe(etsiOhjelma(input));
-            //renderöidään tulokset
 
         }catch(error){
             alert("Something went wrong while searching for recipes");
@@ -143,17 +149,18 @@ function reseptiHaku(query){
 }
 
 
-//funktio reseptien näyttämisen kontrolloimiseksi
+//funktio reseptien esittämisen kontrolloimiseksi
 async function controlRecipe(){
     //luodaan Hashissä olevasta IDstä muuttuja jossa oleva # muutetaan tyhjäksi jotta
-    //pystymme lukemaan pelkkiä numeroita IDstä
+    //korvaamme # merkin tyhjällä jotta saamme IDn koostumaan pelkistä numeroista
     const id = window.location.hash.replace("#", "");
 
-    //jos löytyy ID niin toteutetaan seuraava osio
+    //jos löytyy ID niin tyhjennetään vanhat reseptit näkymästä, haetaan IDn mukainen resepti APIsta ja renderöidään tämä näkymään
     if(id){
-        //jos ID löytyy niin
+        //valmistellaan ui
         clearRecipe();
         try{
+            //renderöidään resepti
             reseptiRender(id);
         }catch(error){
             alert("Error rendering recipe!");
@@ -192,9 +199,8 @@ function reseptiRender(id){
         <div class="recipe__directions">
             <h2 class="heading-2">How to cook it</h2>
             <p class="recipe__directions-text">
-                This recipe was carefully designed and tested by
-                <span class="recipe__by">${jsonData.recipe.publisher}</span>. Please check out directions at their website.
-            </p>
+                This recipe was designed by 
+                <span class="recipe__by">"${jsonData.recipe.publisher}"</span>. Please visit their webside for more indepth directions from the link below.
         
             <a class="btn-small recipe__btn" href="${jsonData.recipe.source_url}" target="_blank">
                 <span class="directions">Directions</span> 
@@ -298,14 +304,6 @@ const createIngredient = ingredient => `
 `;
 
  
-function guidGenerator() {
-    var S4 = function() {
-       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-    };
-    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
-}
-let shopItems;
-let shopListItems = [];
 
 function addToCart(){
     unifiedIngredients.forEach(e =>{
