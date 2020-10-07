@@ -284,8 +284,8 @@ function locateToGrocery() {
         
 };
 
-//funktio millä kirjoitetaan HTMLään reseptin ainesosat
 
+//funktio millä kirjoitetaan HTMLään reseptin ainesosat
 const createIngredient = ingredient => `
 <li class="recipe__item">
     <div class="recipe__count">${ingredient.count}</div>
@@ -304,7 +304,7 @@ function guidGenerator() {
     };
     return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 }
-let shopItems = [];
+let shopItems;
 let shopListItems = [];
 
 function addToCart(){
@@ -336,6 +336,7 @@ function ostosLista (count, unit, ingredient) {
     return item;
 };
 
+
 function deleteItem(id){
     const item = shopListItems.findIndex(e => e.id === id);
     shopListItems.splice(item, 1);
@@ -343,7 +344,6 @@ function deleteItem(id){
     if (rItem) rItem.parentElement.removeChild(rItem);
 
 };
-
 
 
 
@@ -355,9 +355,7 @@ const renderItem = item => {
                 <p class="groceryUnit">${item.unit}</p>
             </div>
             <p class="shopping__description">${item.ingredient}</p>
-            <button class="deleteButton">
-                <img src="ikonit/deleteikoni.png" width="15px" height="15px"/>
-            </button>
+            <button class="deleteButton">Delete Item</button>
         </li>   
     `;
     groceryList.insertAdjacentHTML('beforeend', markup);
