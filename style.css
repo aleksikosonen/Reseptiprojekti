@@ -330,6 +330,11 @@ footer {
     margin-bottom: 25px;
 }
 
+#appImage {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 #galleryHeader {
     color: #AD974F;
     font-family: Baskerville;
