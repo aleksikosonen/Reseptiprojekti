@@ -262,7 +262,7 @@ footer {
 
 #addToList {
     margin: 25px 50px 25px 50px;
-    border-radius: 4px;
+    border-radius: 2px;
     background-color: #AD974F;
     border: none;
     color: #FFFFFF;
@@ -342,6 +342,14 @@ footer {
     margin-bottom: 25px;
 }
 
+.galleryImage img {
+    transition: transform .5s ease;
+}
+
+.galleryImage:hover img {
+    transform: scale(1.05);
+}
+
 #appImage {
     display: flex;
     flex-wrap: wrap;
@@ -363,6 +371,14 @@ footer {
 #creatorsImagesRow {
     display: flex;
     flex-wrap: wrap;
+}
+
+.creatorsImage img {
+    transition: transform .5s ease;
+}
+
+.creatorsImage:hover img {
+    transform: scale(1.05);
 }
 
 .creatorsImage {
