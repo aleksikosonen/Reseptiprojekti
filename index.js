@@ -5,34 +5,43 @@ const searchResults = document.querySelector(".resultGuide");
 const resList = document.querySelector(".search_results_list");
 const mapButton = document.getElementById("map"); // tällä saaa map buttonin toimimaan, kato lightbox täältä http://users.metropolia.fi/~janneval/media/viikko3.html
 const recipe = document.querySelector(".recipe");
-//const logoButton = document.querySelector(".logo");
-//const shoppinList = document.querySelector('.shopping__description');
+const logoButton = document.querySelector(".logo");
 const addToList = document.getElementById("addToList");
 const groceryList = document.querySelector(".groceryList");
-//const deleteBtn = document.getElementById("deleteButton");
-//const guideUse = document.querySelector('.guideForUseSmall');
+const deleteBtn = document.getElementById("deleteButton");
 const groceryGuide = document.querySelector('.myGroceryList');
 
 //2 Globaalia muuttujaa reseptien ainesosien pätkimistä varten
 let ingredientsData;
 let unifiedIngredients;
 
-//2 globaalia muuttujaa ostoslista ominaisuutta varten
-let shopItems;
+//globaali muuttuja ostoslista ominaisuutta varten
 let shopListItems = [];
 
-//event listeneri hakukentälle
+//eventListener metodi hakukentälle
 searchForm.addEventListener("submit", e =>{
     e.preventDefault();
     searchControl();
 });
 
-//kun URLässä oleva hash muuttuu, ajetaan funktio "controlRecipe"
-//window.onhashchange = controlRecipe;
-//myös jos URLässä on hash jo valmiiksi, ja sivu ladataan, ajetaan funktio "controlRecipe"
 
+//myös jos URLässä on hash jo valmiiksi, ja sivu ladataan, ajetaan funktio "controlRecipe"
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
 
+
+//asetetaan ohjeet hakukoineiston printtaamalle alueelle
+function guideText() {
+    const mark = `
+            <p class="resultGuide">Here you have the results, click one to see more</p>
+            `
+    if (searchResults.innerHTML.length < 1){
+        //kirjoitetaan vain jos hakutuloksia ei ole vielä kirjoitettu
+        searchResults.insertAdjacentHTML('afterbegin', mark);
+    }
+}
+
+
+//funktio millä luodaan ID
 function guidGenerator() {
     var S4 = function() {
         return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
@@ -40,11 +49,9 @@ function guidGenerator() {
     return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 }
 
-const url = window.location.href;
-const lastPart = url.substr(url.lastIndexOf('/') + 1);
 
+//hakunkentän nollaamiseen käytettävä funktio
 function clearSearchInput(){
-    //hakunkentän nollaamiseen käytettävä funktio
     searchInput.value = "";
 };
 
@@ -65,6 +72,22 @@ function clearRecipe() {
 };
 
 
+//Navigoidaan sivu resepti näkymän mukaan
+function locate() {
+    document.querySelector('.recipe').scrollIntoView({
+        behavior: 'smooth'
+    });
+}
+
+
+//navigoidaan sivu ostoslista näkymän mukaan
+function locateToGrocery() {
+    document.querySelector('.grocery').scrollIntoView({
+        behavior: 'smooth'
+    });
+}
+
+
 //Hakukoneiston ajamiseen tarkoitettu ohjelma
 async function searchControl() {
     //haetaan näkymästä input
@@ -74,12 +97,12 @@ async function searchControl() {
         //valmistellaan UI hakutuloksia varten
         clearSearchResults();
         clearSearchInput();
-
         //haetaan reseptit
         try{
+            //kirjoitetaan guideText
             guideText();
+            //annetaan reseptiHaku funktiolle parametriksi hakuekntän input
             reseptiHaku(input);
-
         }catch(error){
             alert("Something went wrong while searching for recipes");
         }
@@ -87,19 +110,9 @@ async function searchControl() {
 };
 
 
-//asetetaan ohjeet hakukoineiston printtaamalle alueelle
-function guideText() {
-    const mark = `
-            <p class="resultGuide">Here you have the results, click one to see more</p>
-            `
-    if (searchResults.innerHTML.length < 1){      
-        searchResults.insertAdjacentHTML('afterbegin', mark);
-    }
-}    
-
-
 //funktio missä haetaan reseptejä APIsta ja kirjoitetaan hakukenttä alueeseen
 function reseptiHaku(query){
+    //asetetaan muuttuja arvo API kutsulle
     const url = `https://forkify-api.herokuapp.com/api/search?q=${query}`;
     fetch(url)
     .then(response =>response.json())
@@ -128,7 +141,7 @@ function reseptiHaku(query){
     .catch((error) => {
         alert("Oops! We couldn't find anything with your search :( You can try again (try searching for example lamb or ice cream!)")
     });
-        
+
 }
 
 
@@ -162,6 +175,7 @@ function reseptiRender(id){
     .then((jsonData) => {
         //kirjoitetaan HTMLään resepti
         ingredientsData = jsonData.recipe.ingredients;
+        //Kutsutaan funktio millä muokataan API kutsusta saadun reseptin ainesosat yhtenäisemmiksi sekä jotta niistä pystyy erotella ainesosat, määrät sekä mittayksiköt
         unifiedIngredients = unifyIngredients();
         const mark = `
         <figure class="recipe_figure">
@@ -172,7 +186,8 @@ function reseptiRender(id){
         </figure>
         <div class="recipe__ingredients">
             <ul class="recipe__ingredient-list">
-                ${unifiedIngredients.map(el => createIngredient(el)).join('')}
+                ${/**kutsutaan .map metodia mille syötetään parametrina createIngredient funktio jolla itse ainesosat kirjoitetaan HTMLään **/
+            unifiedIngredients.map(el => createIngredient(el)).join('')}
             </ul>
             <div>
             <button id="addToList" href="#" onclick="addToCart()">Add ingredients to shopping list</button>
@@ -184,7 +199,8 @@ function reseptiRender(id){
             <p class="recipe__directions-text">
                 This recipe was designed by 
                 <span class="recipe__by">"${jsonData.recipe.publisher}"</span>. Please visit their webside for more indepth directions from the link below.</p>
-                <a class="btn-small recipe__btn" href="${jsonData.recipe.source_url}" target="_blank">
+        
+            <a class="btn-small recipe__btn" href="${jsonData.recipe.source_url}" target="_blank">
                 <span class="directions">Directions</span> 
             </a>
         </div>
@@ -195,82 +211,73 @@ function reseptiRender(id){
 };
 
 
-//Navigoidaan sivu keskimmäiseen reseptinäkymään
- function locate() {
-    document.querySelector('.recipe').scrollIntoView({
-        behavior: 'smooth'
-    });
-}
-
-// Navigoidaan sivu ostoslistanäkymään
-function locateToGrocery() {
-    document.querySelector('.grocery').scrollIntoView({
-        behavior: 'smooth'
-    });
-}
-
-
-
 //funktio valmistusaineiden yhdistämiseksi
- function unifyIngredients(){
+function unifyIngredients(){
     /**tehdään kaksi arrayta, missä ensimmäisessä on resepteissä löydetyissä muodoissa olevat mittayksiköt
      * sen jälkeen tehdään array missä muodossa halutaan ne esittää**/
 
     const longUnits = ["tablespoons", "tablespoon", "ounces", "ounce", "teaspoons", "teaspoon", "cups", "pounds"];
     const shortUnits = ["tbsp", "tbsp", "oz", "oz", "tsp", "tsp", "cup", "pound"];
-    
-        
-        //funktio millä muutetaan valmistusaineet array muotoon, eritellään määrät, mittayksiköt sekä ainesosat
-        const ingredientsNew = ingredientsData.map(e => {
-            
-            let ingredient = e.toLowerCase();
-            longUnits.forEach((unit, i) => {
-                ingredient = ingredient.replace(unit, shortUnits[i])
-            });
-            //poistetaan ylimääräiset sulut 
-            ingredient = ingredient.replace(/ *\([^)]*\) */g, " ");
 
-            //pätkitään valmistusaineet määriin, mittayksiköihin sekä ainesosiin
-            const arrIng = ingredient.split(" ");
-            const unitIndex = arrIng.findIndex(e2 => shortUnits.includes(e2))
-            
-            let ingredientObject;
 
-            if (unitIndex > -1) {
-                // Valmistusaineessa on mittayksikkö
-                const arrCount = arrIng.slice(0, unitIndex);
-                let count;
+    //funktio millä muutetaan valmistusaineet array muotoon, eritellään määrät, mittayksiköt sekä ainesosat
+    const ingredientsNew = ingredientsData.map(e => {
 
-                if (arrCount.length === 1) {
-                    count = eval(arrIng[0].replace('-', '+')).toFixed(2);
-                } else {
-                    count = eval(arrIng.slice(0, unitIndex).join('+')).toFixed(2);
-                }
+        //muutetaan kaikki ainesosat siten että niissä on vain pieniä kirjaimia
+        let ingredient = e.toLowerCase();
+        //korvataan longUnits arrayssa olleet yksiköt shortUnits arrayssa olevilla vastaavilla
+        longUnits.forEach((unit, i) => {
+            ingredient = ingredient.replace(unit, shortUnits[i])
+        });
 
-                ingredientObject = {
-                    count,
-                    unit: arrIng[unitIndex],
-                    ingredient: arrIng.slice(unitIndex + 1).join(' ')
-                };
+        //poistetaan ylimääräiset sulut
+        ingredient = ingredient.replace(/ *\([^)]*\) */g, " ");
 
-            } else if (parseInt(arrIng[0], 10)) {
-                // Valmistusaineessa ei ole mittayksikköä mutta arrayn ensimmäinen elementti on numero
-                ingredientObject = {
-                    count: parseInt(arrIng[0], 10),
-                    unit: '',
-                    ingredient: arrIng.slice(1).join(' ')
-                }
-            } else if (unitIndex === -1) {
-                // Valmistusaineessa ei ole mittayksikköä eikä numeroa ensimmäisellä paikalla
-                ingredientObject = {
-                    count: "",
-                    unit: '',
-                    ingredient
-                }
+        //pätkitään valmistusaineet määriin, mittayksiköihin sekä ainesosiin
+        const arrIng = ingredient.split(" ");
+        //tehdään muuttuja jonka arvona on kaikki mittayksiköt
+        const unitIndex = arrIng.findIndex(e2 => shortUnits.includes(e2))
+
+        //valmistellaan muuttuja mitä pystyy muokkaamaan kaikissa if - else lausekkeen osioissa
+        let ingredientObject;
+
+        if (unitIndex > -1) {
+            // jos valmistusaineissa on mittayksikkö, suoritetaan seuraava osio
+            const arrCount = arrIng.slice(0, unitIndex);
+            let count;
+
+            if (arrCount.length === 1) {
+                //valmistusaineissa on numero sekä mittayksikkö
+                count = eval(arrIng[0].replace('-', '+')).toFixed(2);
+            } else {
+                //valmistusaineissa ei ole numeroa mutta mittayksikkö
+                count = eval(arrIng.slice(0, unitIndex).join('+')).toFixed(2);
             }
-            return ingredientObject;
-        }); return ingredientsNew;
-        
+
+            ingredientObject = {
+                count,
+                unit: arrIng[unitIndex],
+                ingredient: arrIng.slice(unitIndex + 1).join(' ')
+            };
+
+        } else if (parseInt(arrIng[0], 10)) {
+            // jos valmistusaineessa ei ole mittayksikköä mutta arrayn ensimmäinen elementti on numero suoritetaan seuraava osio
+            ingredientObject = {
+                count: parseInt(arrIng[0], 10),
+                unit: '',
+                ingredient: arrIng.slice(1).join(' ')
+            }
+        } else if (unitIndex === -1) {
+            // Valmistusaineessa ei ole mittayksikköä eikä numeroa ensimmäisellä paikalla
+            ingredientObject = {
+                count: "",
+                unit: '',
+                ingredient
+            }
+        }
+        return ingredientObject;
+    }); return ingredientsNew;
+
 };
 
 
@@ -280,23 +287,26 @@ const createIngredient = ingredient => `
     <div class="recipe__count">${ingredient.count}</div>
     <div class="recipe__unit">${ingredient.unit}</div>
     <div class="recipe__ingredient">
-        <!--<span class="recipe__unit">${ingredient.unit}</span>-->
         ${ingredient.ingredient}
     </div>
 </li>
 `;
 
- 
-// Funktio jolla viedään valittu resepti ostoskoriin
+
+//funktio millä lisätään valmistusaineet ostoslistalle
 function addToCart(){
+    //käydään aikaisemmin muokattu unifiedIngredients muuttuja läpi
     unifiedIngredients.forEach(e =>{
-        shopItems = ostosLista(e.count, e.unit, e.ingredient);
+        //luodaan muuttuja joka saa arvokseen ostosLista funktion, ja tälle funktiolle asetetaan parametreiksi unifiedIngredienttien määrä mittayksikkö sekä ainesosa
+        let shopItems = ostosLista(e.count, e.unit, e.ingredient);
+        //pusketaan äsken luotu muuttuja shopListItems arrayn perälle
         shopListItems.push(shopItems);
-        //console.log(shopItems);
+        //kutsutaan funktio renderItem joka saa parametriksi saman shopItems muuttujan
         renderItem(shopItems);
     });
+    //kutsutaan sivun navigoimis funktio
     locateToGrocery();
-    console.log(shopListItems[1]);
+    //jos ostoslista näkymässä ei ole vielä esineitä, kirjoitetaan ohje teksti
     if (groceryGuide.innerHTML.length < 1) {
         const groceryGuideText = `
             <p>Here you have your grocerylist!</p>
@@ -304,30 +314,37 @@ function addToCart(){
             `;
         groceryGuide.insertAdjacentHTML('afterbegin', groceryGuideText);
     }
-    };
+};
 
 
+//funktio missä käsitellään ainesosat esitettäväksi ostoslistalle
 function ostosLista (count, unit, ingredient) {
- item = {
-     id: guidGenerator(),
-     count,
-     unit,
-     ingredient
- }
+    item = {
+        //luodaan jokaiselle yksittäiselle alkiolle erillinen id, määrä, mittayksikkö sekä ainesosa
+        id: guidGenerator(),
+        count,
+        unit,
+        ingredient
+    }
+    //tämän jälkeen paluuarvona toimii tämä äsken luotu item
     return item;
 };
 
 
+//funktio yksittäisten ostoslista asioiden poistamista varten
 function deleteItem(id){
+    //poistetaan ensin arraysta, etsimällä index minkä ID mätsää funktiolle syötetyn idn kanssa
     const item = shopListItems.findIndex(e => e.id === id);
+    //käytetään splice metodia poistamaan äsken luotu item muuttuja
     shopListItems.splice(item, 1);
+    //poistetaan sama item vielä HTMLästä
     const rItem = document.querySelector(`[data-itemid="${id}"]`);
     if (rItem) rItem.parentElement.removeChild(rItem);
 
 };
 
 
-
+//funktio HTMLään ostosten kirjoittamista varten
 const renderItem = item => {
     const markup = `
         <li class="shopping_item" data-itemid=${item.id}>
@@ -337,25 +354,21 @@ const renderItem = item => {
             </div>
             <p class="shopping__description">${item.ingredient}</p>
             <button class="deleteButton">
-                <img src="Ikonit/deleteikoni.png" width="15px" height="15px"/>
-            </button>        
-            </li>   
+                <img src="ikonit/deleteikoni.png" width="15px" height="15px"/>
+            </button>
+        </li>   
     `;
     groceryList.insertAdjacentHTML('beforeend', markup);
 };
 
 
+//luodaan eventListener kuuntelemaan ostoslistan klikkauksia
 groceryList.addEventListener('click', e => {
+    //luodaan id muuttuja joka saa arvokseen lähimmän elementin ID arvon
     const id = e.target.closest('.shopping_item').dataset.itemid;
-
-    // Handle the delete button
+    // jos painike mitä klikattiin oli ".deletebutton"
     if (e.target.matches('.deleteButton, .deleteButton *')) {
-        // Delete from state
+        // ajetaan funktio deleteItem joka saa parametriksi IDn
         deleteItem(id);
-
-    // Handle the count update
-    } else if (e.target.matches('.shopping__count-value')) {
-        const val = parseFloat(e.target.value, 10);
-        state.list.updateCount(id, val);
     }
 });

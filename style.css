@@ -72,7 +72,7 @@ header {
 }
 
 .recipeGuide {
-    margin: 25px;
+    margin: 50px 25px 25px 25px;
     padding: 5px;
     border: #AD974F;
     border-style: groove;
@@ -223,7 +223,7 @@ footer {
     border-radius: 10px;
     width: 100%;
     object-fit: contain;
-    margin-top: 30px;
+    margin-top: 35px;
 }
 
 .recipe__ingredient-list {
@@ -420,7 +420,7 @@ footer {
 }
 
 .myGroceryList {
-    margin: 25px;
+    margin: 50px 25px 25px 25px;
 }
 
 .shopping__count-value {
