@@ -34,10 +34,11 @@ function guideText() {
     const mark = `
             <p class="resultGuide">Here you have the results, click one to see more</p>
             `
-    if (searchResults.innerHTML.length < 1){
+    if (searchResults.innerHTML.length < 1) {
         //kirjoitetaan vain jos hakutuloksia ei ole vielä kirjoitettu
         searchResults.insertAdjacentHTML('afterbegin', mark);
     }
+
 }
 
 
@@ -78,7 +79,6 @@ function locate() {
         behavior: 'smooth'
     });
 }
-
 
 //navigoidaan sivu ostoslista näkymän mukaan
 function locateToGrocery() {
