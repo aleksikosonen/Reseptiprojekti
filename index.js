@@ -310,7 +310,7 @@ function addToCart(){
     if (groceryGuide.innerHTML.length < 1) {
         const groceryGuideText = `
             <p>Here you have your grocerylist!</p>
-            <p>Feel free to delete the items you don't need to purchase</p>
+            <p>Feel free to change the amount you need or delete the items you don't need to purchase</p>
             `;
         groceryGuide.insertAdjacentHTML('afterbegin', groceryGuideText);
     }
