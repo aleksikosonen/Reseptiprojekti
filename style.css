@@ -22,7 +22,6 @@ header {
 }
 
 .headerPhoto {
-    //background-image:url("headerImage1.jpg");
     background-image: url("headerbackground.jpg");
     width: 100%;
     height: 250px;
@@ -214,6 +213,8 @@ footer {
     text-align: center;
     color: #AD974F;
     font-family: Baskerville;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 #homeLogo {
