@@ -1,42 +1,51 @@
-<link rel="stylesheet" href="style.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VALIDATE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-<section id="validateForm">
-    <form class="validateUser">
-        <label for="usr">ENTER USERNAME:</label>
-        <input class="usernameInput" type="text" name="text2" id="usr">
-    </form>
+<body>
 
-    <form class="validatePassword">
-        <label for="passw">ENTER PASSWORD:</label>
-        <input class="passwordInput" type="password" name="text1" id="passw">
-    </form>
-</section>
+<main id="validate">
+    <section id="validateForm">
+        <form class="validateUser">
+            <label for="usr">ENTER USERNAME:</label>
+            <input class="usernameInput" type="text" name="text2" id="usr">
+        </form>
 
+        <form class="validatePassword">
+            <label for="passw">ENTER PASSWORD:</label>
+            <input class="passwordInput" type="password" name="text1" id="passw">
+        </form>
+    </section>
 
-<p><input type="button" value="Check In" name="Submit" onclick=javascript:validate(usr.value,"kauttis",passw.value,"salasana")></p>
-    
-    <script>
-    
-    //funktio millä katsotaan että syötetyt käyttäjätiedot ovat samat kuin mitä ollaan pyydetty
-    function validate(text1,text2,text3,text4){
-        //if lauseke millä tarkistetaan onko syötteet samat kuin pyydetyt salasanat ja käyttäjätiedot
-        if (text1==text2 && text3==text4){
-            //jos syötteet ovat oikein asetetaan load funktion parametriksi "creators.html"
-            load('creators.html');
-        }else{
-            //jos syötteet eivät ole oikein asetetaan load funktion parametriksi "gallery.html"
-            load('gallery.html');
-        }
+    <input type="button" value="Check In" name="Submit" onclick=javascript:validate(usr.value,"kauttis",passw.value,"salasana")>
+
+    <figure id="homeLogo">
+        <a href="./index.html">
+            <img class="logoGallery" src="GoldLogoFinal.png" alt="logo"
+                 width="200" height="200">
+        </a>
+    </figure>
+</main>
+</body>
+<script>
+
+  //funktio millä katsotaan että syötetyt käyttäjätiedot ovat samat kuin mitä ollaan pyydetty
+  function validate(text1,text2,text3,text4){
+    //if lauseke millä tarkistetaan onko syötteet samat kuin pyydetyt salasanat ja käyttäjätiedot
+    if (text1==text2 && text3==text4){
+      //jos syötteet ovat oikein asetetaan load funktion parametriksi "creators.html"
+      load('creators.html');
+    }else{
+      //jos syötteet eivät ole oikein asetetaan load funktion parametriksi "gallery.html"
+      load('gallery.html');
     }
-    //load funktio millä mennään eri kansioihin riippuen käyttäjän syötteestä
-    function load(url){
-     location.href=url;
-    }
-    </script>
-
-<a href="./index.html">
-  <img class="logoGallery" src="GoldLogoFinal.png" alt="logo"
-       width="200" height="200">
-</a>
-
-<div class="validateText"></div>
+  }
+  //load funktio millä mennään eri kansioihin riippuen käyttäjän syötteestä
+  function load(url){
+    location.href=url;
+  }
+</script>

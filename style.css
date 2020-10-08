@@ -157,7 +157,7 @@ header {
 }
 
 .results_name {
-    font-size: 25px;
+    font-size: 24px;
     text-align: center;
     color: #231F20;
     text-decoration: underline;
@@ -200,23 +200,33 @@ footer {
     text-align: center;
 }
 
+#mapPage {
+    box-sizing: border-box;
+    text-align: center;
+}
+
 #map {
     width: 100%;
-    height: 50%;
+    height: 400px;
 }
 
 #mapText {
     text-align: center;
     color: #AD974F;
     font-family: Baskerville;
-    font-size: 18px;
+}
+
+#homeLogo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .logoMap {
-    display: flex;
-    align-content: center;
     margin-left: auto;
     margin-right: auto;
+    cursor: pointer;
+    justify-content: center;
 }
 
 .recipe_figure > img{
@@ -427,6 +437,8 @@ footer {
 }
 
 .validatePassword {
+    margin-top: 10px;
+    margin-bottom: 10px;
     color: #AD974F;
     font-family: Baskerville;
     display: flex;
@@ -460,10 +472,6 @@ footer {
 }
 
 .search_icon {
-    cursor: pointer;
-}
-
-.logoMap {
     cursor: pointer;
 }
 
